@@ -156,6 +156,9 @@ cite {
 	color: var(--ink);
 	white-space: nowrap;
 }
+.runhead .mark .latin {
+	letter-spacing: 0.02em;
+}
 .runhead nav {
 	display: flex;
 	align-items: center;
@@ -267,11 +270,15 @@ cite {
 }
 .book-title {
 	margin: 0;
-	font: 900 64px/1.14 var(--serif);
+	font: 900 56px/1.14 var(--serif);
 	letter-spacing: 0.04em;
 	word-break: keep-all;
 	overflow-wrap: anywhere;
 	text-wrap: balance;
+}
+.book-title .latin {
+	letter-spacing: 0;
+	overflow-wrap: normal;
 }
 .title-rule {
 	width: 40px;
@@ -1068,7 +1075,7 @@ cite {
 		padding-top: 44px;
 	}
 	.book-title {
-		font-size: 46px;
+		font-size: 42px;
 		letter-spacing: 0.03em;
 	}
 	.title-rule {
@@ -1172,5 +1179,21 @@ cite {
 		grid-column: 1;
 		text-align: left;
 		border-top: 1px solid var(--rule);
+	}
+}
+
+/* Narrow phones: the wordmark and the nav no longer fit on one row (375px and
+   below scrolled sideways), so the nav drops to its own row with the toggles
+   pushed to the right. */
+@media (max-width: 420px) {
+	.runhead-inner {
+		flex-wrap: wrap;
+		row-gap: 10px;
+	}
+	.runhead nav {
+		width: 100%;
+	}
+	.toggles {
+		margin-left: auto;
 	}
 }
