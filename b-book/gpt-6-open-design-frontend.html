@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPT-6 + Open Design 前端设计，我给到夯 · 邢政的工作笔记</title>
+<script>
+	// Apply a saved 日/夜 choice before first paint; without one, CSS follows the system.
+	(function () {
+		try {
+			var t = localStorage.getItem("b-theme");
+			if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+		} catch (e) {}
+	})();
+</script>
+<link rel="stylesheet" href="../fonts/gf-1043b730e6.css">
+<link rel="stylesheet" href="book.css">
+</head>
+<body class="article">
+
+<header class="runhead">
+	<div class="runhead-inner">
+		<a class="mark" href="index.html">邢政的工作笔记</a>
+		<nav aria-label="主导航">
+			<a href="index.html" aria-current="true">目录</a>
+			<a href="works.html">作品</a>
+			<a href="about.html">关于</a>
+			<span class="toggles">
+				<span class="lang"><a href="gpt-6-open-design-frontend.html" aria-current="true">中</a><span class="slash">/</span><a href="#" lang="en">EN</a></span>
+				<button class="theme" type="button" aria-label="夜读模式" aria-pressed="false"><span class="day">日</span><span class="slash">/</span><span class="night">夜</span></button>
+			</span>
+		</nav>
+	</div>
+</header>
+
+<main class="chapter">
+	<header class="chapter-head">
+		<div>
+			<p class="kicker">卷一 · <span class="latin">Agent</span> 工程<span class="no">03</span></p>
+			<h1 class="chapter-title">GPT-6&nbsp;+ Open&nbsp;Design <wbr>前端设计，<wbr>我给到夯</h1>
+			<p class="chapter-deck">从原型到实际页面，聊聊这次前端设计体验。</p>
+			<p class="meta"><span class="mi">邢政</span><span class="sep">·</span><span class="mi"><time datetime="2026-09-11">2026-09-11</time></span><span class="sep">·</span><span class="mi">3 分钟</span><span class="sep">·</span><span class="mi"><a href="https://zhuanlan.zhihu.com/p/2081733421001335555">首发于知乎</a></span></p>
+		</div>
+	</header>
+
+	<article class="prose">
+<p>最近在写一个 GitHub 趋势跟踪的项目。</p>
+
+<p>之前我习惯定期去扫 GitHub 的 Trending，但发现它每天展示的项目数量有限，其实上面还有很多有意思的项目没有被发掘出来。后来我找到了 OSS Insight，定期去爬它每天的排行数据并入库。数据入库之后，我会每天监控它们的增长情况，看看近期社区对哪些项目感兴趣。因为项目比较多，为了提高效率，我用 AI 统一做总结。然后每天会产出的飞书文档，都是免费公开的，里面做了一些简单分类，大家感兴趣的话可以去看看</p>
+
+<p>不过前两天 OSS Insight 的数据源应该是被封挂掉了，所以我只能自己基于 GitHub daily 数据以及之前入库的历史数据重新搭建，顺便补充一些直接搜索的能力。</p>
+
+<p><a href="https://enbmphajlu.feishu.cn/wiki/YbZBwRmwgiU9CVkwXNicxB5QnSc">OSS Insight 开源趋势项目库（公开可读）</a></p>
+
+<figure class="fig">
+	<figcaption><span class="fig-no">图 1</span>　飞书日报中的项目分类与摘要（2026-09-01）</figcaption>
+	<img src="img/gpt-6-open-design-frontend-image-1.webp" width="1000" height="777" alt="飞书日报中的 GitHub 趋势项目分类与摘要" loading="lazy" decoding="async">
+</figure>
+
+<p>现在这个项目的目标主要是替代之前的方案，本来是做给我自己用的。我刚开始用 GPT-5.6 做设计，后来 GPT-6 出来之后又更新了一版，但整体界面还是很丑。</p>
+
+<p>之前在 Claude 封我号之前，我一直用 Claude Design，体验非常棒；号被封后我换了 OpenDesign，当时 bug 比较多、体验一般，就删掉了。最近我重新用起 OpenDesign，发现效果超出预期：</p>
+
+<ol>
+	<li>产品体验比想象中好很多，丝滑很多，他们还是做了比较多的优化的</li>
+	<li>支持直接连接 Codex，配合GPT6做前端设计与修改，有一种“指哪打哪”的感觉，极大降低了前端修改的成本</li>
+</ol>
+
+<p>如果大家有兴趣，可以用 OpenDesign 搭配 GPT-6 来做一些 Web 的小设计。在一些细节修复和整体修改上，体验确实非常好</p>
+
+<figure class="fig">
+	<figcaption><span class="fig-no">图 2</span>　最早在 OpenDesign 里做的版本（2026-09-09，历史预览截图）</figcaption>
+	<img src="img/gpt-6-open-design-frontend-image-2.webp" width="1440" height="900" alt="OpenDesign 中最早制作的前端版本" loading="lazy" decoding="async">
+</figure>
+
+<figure class="fig">
+	<figcaption><span class="fig-no">图 3</span>　后来在 OpenDesign 中确认的设计（2026-09-10，设计原型）</figcaption>
+	<img src="img/gpt-6-open-design-frontend-image-3.webp" width="1440" height="900" alt="在 OpenDesign 中确认的设计原型" loading="lazy" decoding="async">
+</figure>
+
+<figure class="fig">
+	<figcaption><span class="fig-no">图 4</span>　现在的项目实际页面（2026-09-11，浏览器实拍）</figcaption>
+	<img src="img/gpt-6-open-design-frontend-image-4.webp" width="1440" height="745" alt="GitHub 趋势跟踪项目的实际网页" loading="lazy" decoding="async">
+</figure>
+	</article>
+</main>
+
+<nav class="chapter-end" aria-label="文末">
+	<p class="source"><a href="https://zhuanlan.zhihu.com/p/2081733421001335555">首发于知乎 →</a></p>
+	<div class="pager">
+		<a class="prev" href="agent-engineering-one-and-half-years.html"><span class="label">上一篇</span><span class="no">02</span><span class="tt">阶段性总结，<wbr>在大厂<wbr>做了一年半&nbsp;Agent&nbsp;后</span></a>
+		<a class="next" href="startup-notes-after-leaving-big-tech.html"><span class="label">下一篇</span><span class="no">04</span><span class="tt">关于<wbr>创业碎碎念</span></a>
+	</div>
+	<p class="back"><a href="index.html#contents">回到目录</a></p>
+</nav>
+
+<footer class="site-foot">
+	<div class="site-foot-inner">
+		<span>邢政的工作笔记　© 2026</span>
+		<nav aria-label="页脚"><a href="https://xz1220.github.io/rss.xml">RSS</a><a href="https://github.com/xz1220">GitHub</a><a href="https://www.zhihu.com/people/xz1220">知乎</a><a href="about.html">关于本站</a></nav>
+	</div>
+</footer>
+
+<script>
+	(function () {
+		var root = document.documentElement;
+		var button = document.querySelector(".theme");
+		var system = window.matchMedia("(prefers-color-scheme: dark)");
+		function isDark() {
+			var t = root.getAttribute("data-theme");
+			return t ? t === "dark" : system.matches;
+		}
+		function sync() {
+			button.setAttribute("aria-pressed", String(isDark()));
+		}
+		button.addEventListener("click", function () {
+			var next = isDark() ? "light" : "dark";
+			root.setAttribute("data-theme", next);
+			try {
+				localStorage.setItem("b-theme", next);
+			} catch (e) {}
+			sync();
+		});
+		system.addEventListener("change", sync);
+		sync();
+	})();
+</script>
+</body>
+</html>

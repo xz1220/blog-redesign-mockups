@@ -5,6 +5,15 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>人类只是再次提升了编程的抽象层级 · 邢政的工作笔记</title>
+<script>
+	// Apply a saved 日/夜 choice before first paint; without one, CSS follows the system.
+	(function () {
+		try {
+			var t = localStorage.getItem("b-theme");
+			if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+		} catch (e) {}
+	})();
+</script>
 <link rel="stylesheet" href="../fonts/gf-1043b730e6.css">
 <link rel="stylesheet" href="book.css">
 </head>
@@ -14,10 +23,13 @@
 	<div class="runhead-inner">
 		<a class="mark" href="index.html">邢政的工作笔记</a>
 		<nav aria-label="主导航">
-			<a href="index.html#contents" aria-current="page">目录</a>
-			<a href="index.html#works">作品</a>
-			<a href="index.html#colophon">关于</a>
-			<span class="lang"><a href="article.html" aria-current="true">中</a><span class="slash">/</span><a href="#" lang="en">EN</a></span>
+			<a href="index.html" aria-current="true">目录</a>
+			<a href="works.html">作品</a>
+			<a href="about.html">关于</a>
+			<span class="toggles">
+				<span class="lang"><a href="article.html" aria-current="true">中</a><span class="slash">/</span><a href="#" lang="en">EN</a></span>
+				<button class="theme" type="button" aria-label="夜读模式" aria-pressed="false"><span class="day">日</span><span class="slash">/</span><span class="night">夜</span></button>
+			</span>
 		</nav>
 	</div>
 </header>
@@ -27,7 +39,7 @@
 		<div>
 			<p class="kicker">卷一 · <span class="latin">Agent</span> 工程<span class="no">01</span></p>
 			<h1 class="chapter-title">人类只是再次提升了<wbr>编程的抽象层级</h1>
-			<p class="chapter-deck">从接线器到 Agent，<wbr>人的意图正在更高层被表达。</p>
+			<p class="chapter-deck">从接线器到 Agent，人的意图正在更高层被表达。</p>
 			<p class="meta"><span class="mi">邢政</span><span class="sep">·</span><span class="mi"><time datetime="2026-09-02">2026-09-02</time></span><span class="sep">·</span><span class="mi">22 分钟</span><span class="sep">·</span><span class="mi">更新于 <time datetime="2026-09-24">2026-09-24</time></span><span class="sep">·</span><span class="mi"><a href="https://zhuanlan.zhihu.com/p/2081370754508133635">首发于知乎</a></span></p>
 		</div>
 		<nav class="chapter-toc" aria-labelledby="toc-title">
@@ -36,100 +48,243 @@
 				<li><span>一</span><a href="#s1">接线器</a></li>
 				<li><span>二</span><a href="#s2">Fortran</a></li>
 				<li><span>三</span><a href="#s3">C &amp; Unix</a></li>
-				<li><span>四</span><a href="#">Web &amp; Cloud</a></li>
-				<li><span>五</span><a href="#">AI - 新的抽象层级</a></li>
-				<li><span>六</span><a href="#">站在更大的尺度面前</a></li>
+				<li><span>四</span><a href="#s4">Web &amp; Cloud</a></li>
+				<li><span>五</span><a href="#s5">AI - 新的抽象层级</a></li>
+				<li><span>六</span><a href="#s6">站在更大的尺度面前</a></li>
 			</ol>
 		</nav>
 	</header>
 
 	<figure class="frontispiece">
-		<img src="../assets/the-architects-dream.jpg" width="1920" height="1180" alt="托马斯·科尔《建筑师之梦》：沉睡的建筑师躺在巨型柱头上，眼前层叠展开从埃及金字塔、希腊罗马神殿到哥特教堂的建筑文明。">
+		<img src="img/ai-agent-programming-abstraction-cover.jpg" width="1920" height="1180" alt="托马斯·科尔《建筑师之梦》：沉睡的建筑师躺在巨型柱头上，眼前层叠展开从埃及金字塔、希腊罗马神殿到哥特教堂的建筑文明。">
 		<figcaption>卷首图　<span lang="en" class="latin">Thomas Cole, The Architect’s Dream, 1840 · Toledo Museum of Art ·</span> <a href="https://commons.wikimedia.org/wiki/File:Thomas_Cole_-_Architect%E2%80%99s_Dream_-_Google_Art_Project.jpg">Public domain</a></figcaption>
 	</figure>
 
 	<article class="prose">
-		<p>2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。他随即拿编译器打了个比方：</p>
+<p>2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。他随即拿编译器打了个比方：</p>
 
-		<blockquote class="quote-en" lang="en">
-			<p>“100% of their code is written by compilers. But they never say that.”</p>
-			<footer>— Linus Torvalds</footer>
-		</blockquote>
+<blockquote class="quote-en" lang="en">
+	<p>“100% of their code is written by compilers. But they never say that.”</p>
+</blockquote>
 
-		<p>程序早就经过工具生成，只是过去人们不这样谈论它。他随后说，AI 正在改变编程的方式，却没有改变编程的基本问题。<sup class="sn-ref"><a href="#n1" id="r1">1</a></sup><span class="sidenote" id="n1"><span class="sn-no">1</span>Linus Torvalds 对谈，YouTube，<a href="https://www.youtube.com/watch?v=fi29pfLcW4I&amp;t=1569s">26:09</a> 与 <a href="https://www.youtube.com/watch?v=fi29pfLcW4I&amp;t=1649s">27:29</a>。</span></p>
+<p>程序早就经过工具生成，只是过去人们不这样谈论它。他随后说，AI 正在改变编程的方式，却没有改变编程的基本问题。<sup class="sn-ref"><a href="#n1" id="r1">1</a></sup><span class="sidenote" id="n1"><span class="sn-no">1</span>Linus Torvalds 对谈，YouTube，<a href="https://www.youtube.com/watch?v=fi29pfLcW4I&amp;t=1569s">26:09</a> 与 <a href="https://www.youtube.com/watch?v=fi29pfLcW4I&amp;t=1649s">27:29</a>。</span></p>
 
-		<p>一个月后，Claude Code 核心建设者 Boris Cherny 在另一场访谈里，讲起自己的家庭：祖父使用穿孔卡，父亲写汇编，到了他这一代，使用 Java、JavaScript 和 Python。他说，编程的抽象层级总是在上升。<sup class="sn-ref"><a href="#n2" id="r2">2</a></sup><span class="sidenote" id="n2"><span class="sn-no">2</span>Boris Cherny 访谈，YouTube，<a href="https://www.youtube.com/watch?v=RkQQ7WEor7w&amp;t=613s">10:13</a>。</span></p>
+<p>一个月后，Claude Code 核心建设者 Boris Cherny 在另一场访谈里，讲起自己的家庭：祖父使用穿孔卡，父亲写汇编，到了他这一代，使用 Java、JavaScript 和 Python。他说，编程的抽象层级总是在上升。<sup class="sn-ref"><a href="#n2" id="r2">2</a></sup><span class="sidenote" id="n2"><span class="sn-no">2</span>Boris Cherny 访谈，YouTube，<a href="https://www.youtube.com/watch?v=RkQQ7WEor7w&amp;t=613s">10:13</a>。</span></p>
 
-		<p>而他自己的工作，也从在编辑器里写代码，变成同时运行多个 Claude，再变成编写自动运行的循环，让这些循环提示 Claude、判断下一步。他用一句话描述现在的工作：</p>
+<p>而他自己的工作，也从在编辑器里写代码，变成同时运行多个 Claude，再变成编写自动运行的循环，让这些循环提示 Claude、判断下一步。他用一句话描述现在的工作：</p>
 
-		<blockquote class="quote-en" lang="en">
-			<p>“My job is to write loops.”</p>
-			<footer>— Boris Cherny</footer>
-		</blockquote>
+<blockquote class="quote-en" lang="en">
+	<p>“My job is to write loops.”</p>
+</blockquote>
 
-		<p>其实程序员的工作不仅仅是编码。我们不会因为机器码是编译器生成的，就认为程序员没有在 coding；同样的，在现在这个阶段，我们也不能因为代码是 AI 生成的，就认为程序员没有在 coding。</p>
+<p>其实程序员的工作不仅仅是编码。我们不会因为机器码是编译器生成的，就认为程序员没有在 coding；同样的，在现在这个阶段，我们也不能因为代码是 AI 生成的，就认为程序员没有在 coding。</p>
 
-		<p><strong>改变的从来都不是机器码或者代码是由谁写出来的，而是人编程的抽象层级。</strong></p>
+<p><strong>改变的从来都不是机器码或者代码是由谁写出来的，而是人编程的抽象层级。</strong></p>
 
-		<p>AI Agent 带来的变化，正是人类再次提升了编程的抽象层级。我们开始把目标、约束和预期结果交给 Agent，让它把想法展开成代码，再根据运行结果继续调整。</p>
+<p>AI Agent 带来的变化，正是人类再次提升了编程的抽象层级。我们开始把目标、约束和预期结果交给 Agent，让它把想法展开成代码，再根据运行结果继续调整。</p>
 
-		<p>这件事发生得很快。但如果站在历史的角度上看，软件的发展一直伴随着类似的迁移：一些原本由程序员亲手完成的工作，被新的语言或者工具接手。</p>
+<p>这件事发生得很快。但如果站在历史的角度上看，软件的发展一直伴随着类似的迁移：一些原本由程序员亲手完成的工作，被新的语言或者工具接手。</p>
 
-		<p>截至 2025 年 8 月 31 日，GitHub 上已有超过 113 万个公开仓库引入生成式 AI 模型 SDK，同比增长 178%。<sup class="sn-ref"><a href="#n3" id="r3">3</a></sup><span class="sidenote" id="n3"><span class="sn-no">3</span><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/">GitHub Octoverse 2025</a>，GitHub Blog。</span></p>
+<p>截至 2025 年 8 月 31 日，GitHub 上已有超过 113 万个公开仓库引入生成式 AI 模型 SDK，同比增长 178%。<sup class="sn-ref"><a href="#n3" id="r3">3</a></sup><span class="sidenote" id="n3"><span class="sn-no">3</span><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/">GitHub Octoverse 2025</a>，GitHub Blog。</span></p>
 
-		<figure class="fig">
-			<figcaption><span class="fig-no">图 1</span>　采用生成式 AI 模型 SDK 的公开仓库累计数。数据截至 2025 年 8 月 31 日，来源：GitHub Octoverse 2025。</figcaption>
-			<img src="../assets/image-1.webp" width="1440" height="810" alt="GitHub 上使用生成式 AI 模型 SDK 的公开仓库增长图">
-		</figure>
+<figure class="fig">
+	<figcaption><span class="fig-no">图 1</span>　采用生成式 AI 模型 SDK 的公开仓库累计数。数据截至 2025 年 8 月 31 日，来源：GitHub Octoverse 2025。</figcaption>
+	<img src="img/ai-agent-programming-abstraction-image-1.webp" width="1440" height="810" alt="GitHub 上使用生成式 AI 模型 SDK 的公开仓库增长图" loading="lazy" decoding="async">
+</figure>
 
-		<p>要理解今天，不妨先回顾下历史。</p>
+<p>要理解今天，不妨先回顾下历史。</p>
 
-		<h2 class="ch" id="s1"><span class="ch-no">第一节</span>接线器</h2>
+<h2 class="ch" id="s1"><span class="ch-no">第一节</span>接线器</h2>
 
-		<p>把时钟拨回 1940 年代。那时，“写一个新程序”与“重新设置一台机器”之间，还没有今天这样清楚的分界。</p>
+<p>把时钟拨回 1940 年代。那时<span class="pc">，</span>“写一个新程序”与“重新设置一台机器”之间，还没有今天这样清楚的分界。</p>
 
-		<p>早期 ENIAC 由许多功能单元组成。为了让一次加法的结果进入下一次乘法，程序员需要连接电缆、设置开关，把数学过程变成机器内部的信号路径。Computer History Museum 的记录显示，为一个新问题设计配置、接线和设定开关，可能需要许多天。<sup class="sn-ref"><a href="#n4" id="r4">4</a>,<a href="#n5" id="r5">5</a></sup><span class="sidenote" id="n4"><span class="sn-no">4</span><a href="https://www.computerhistory.org/revolution/birth-of-the-computer/4/78">Computer History Museum：ENIAC</a>。</span><span class="sidenote" id="n5"><span class="sn-no">5</span><a href="https://computerhistory.org/blog/programming-the-eniac-an-example-of-why-computer-history-is-hard/">Programming the ENIAC</a>，Computer History Museum 博客。</span></p>
+<p>早期 ENIAC 由许多功能单元组成。为了让一次加法的结果进入下一次乘法，程序员需要连接电缆、设置开关，把数学过程变成机器内部的信号路径。Computer History Museum 的记录显示，为一个新问题设计配置、接线和设定开关，可能需要许多天。<sup class="sn-ref"><a href="#n4" id="r4">4</a>,<a href="#n5" id="r5">5</a></sup><span class="sidenote" id="n4"><span class="sn-no">4</span><a href="https://www.computerhistory.org/revolution/birth-of-the-computer/4/78">Computer History Museum：ENIAC</a>。</span><span class="sidenote" id="n5"><span class="sn-no">5</span><a href="https://computerhistory.org/blog/programming-the-eniac-an-example-of-why-computer-history-is-hard/">Programming the ENIAC</a>，Computer History Museum 博客。</span></p>
 
-		<figure class="fig">
-			<figcaption><span class="fig-no">图 2</span>　约 1946 年，Betty Jean Jennings（左）和 Frances Bilas（右）在 ENIAC 面板前工作。U.S. Army Photo / ARL Technical Library，经 <a href="https://commons.wikimedia.org/wiki/File:Two_women_operating_ENIAC_(full_resolution).jpg">Wikimedia Commons</a>；美国联邦政府公务作品，在美国属公有领域。</figcaption>
-			<img src="../assets/image-2.webp" width="1280" height="878" alt="Betty Jean Jennings 与 Frances Bilas 在 ENIAC 面板前工作">
-		</figure>
+<figure class="fig">
+	<figcaption><span class="fig-no">图 2</span>　约 1946 年，Betty Jean Jennings（左）和 Frances Bilas（右）在 ENIAC 面板前工作。U.S. Army Photo / ARL Technical Library，经 <a href="https://commons.wikimedia.org/wiki/File:Two_women_operating_ENIAC_(full_resolution).jpg">Wikimedia Commons</a>；美国联邦政府公务作品，在美国属公有领域。</figcaption>
+	<img src="img/ai-agent-programming-abstraction-image-2.webp" width="1280" height="878" alt="Betty Jean Jennings 与 Frances Bilas 在 ENIAC 面板前工作" loading="lazy" decoding="async">
+</figure>
 
-		<p>这张老照片里的人不是在给一份写好的软件做安装。她们设置的线路和开关，表达程序应该怎样运行。计算交给了机器，人类安排计算的过程，却依然是一项具体而繁复的手工劳动。</p>
+<p>这张老照片里的人不是在给一份写好的软件做安装。她们设置的线路和开关，表达程序应该怎样运行。计算交给了机器，人类安排计算的过程，却依然是一项具体而繁复的手工劳动。</p>
 
-		<p>后来，程序开始以编码指令的形式被保存下来。1948 年，经过改造的 ENIAC 执行起存放在功能表开关中的指令；同一年，Manchester Baby 演示了保存在可写存储器中的程序。改变任务，逐渐不再意味着重新布置整台机器。<sup class="sn-ref"><a href="#n6" id="r6">6</a></sup>人开始在一台通用的机器上，描述不同的过程。<span class="sidenote" id="n6"><span class="sn-no">6</span><a href="https://www.computerhistory.org/timeline/computers/">Computer History Museum：计算机时间线</a>。</span></p>
+<p>后来，程序开始以编码指令的形式被保存下来。1948 年，经过改造的 ENIAC 执行起存放在功能表开关中的指令；同一年，Manchester Baby 演示了保存在可写存储器中的程序。改变任务，逐渐不再意味着重新布置整台机器。<sup class="sn-ref"><a href="#n6" id="r6">6</a></sup> 人开始在一台通用的机器上，描述不同的过程。<span class="sidenote" id="n6"><span class="sn-no">6</span><a href="https://www.computerhistory.org/timeline/computers/">Computer History Museum：计算机时间线</a>。</span></p>
 
-		<p>但直接编写机器指令仍然很费力。程序员要面对操作码、地址和具体的硬件规则。汇编语言让这些数字获得了名字：用助记符表达操作，用符号标记位置，再由汇编器完成翻译。<sup class="sn-ref"><a href="#n7" id="r7">7</a></sup><span class="sidenote" id="n7"><span class="sn-no">7</span><a href="https://www.ibm.com/docs/en/zos-basic-skills?topic=zos-assembler-language">IBM 文档：Assembler language</a>，z/OS 基础知识。</span></p>
+<p>但直接编写机器指令仍然很费力。程序员要面对操作码、地址和具体的硬件规则。汇编语言让这些数字获得了名字：用助记符表达操作，用符号标记位置，再由汇编器完成翻译。<sup class="sn-ref"><a href="#n7" id="r7">7</a></sup><span class="sidenote" id="n7"><span class="sn-no">7</span><a href="https://www.ibm.com/docs/en/zos-basic-skills?topic=zos-assembler-language">IBM 文档：Assembler language</a>，z/OS 基础知识。</span></p>
 
-		<p>程序员仍然需要理解机器，却不必每次都亲手处理全部数字编码。机器和人的表达之间，多出了一层可以代劳的工具。</p>
+<p>程序员仍然需要理解机器，却不必每次都亲手处理全部数字编码。机器和人的表达之间，多出了一层可以代劳的工具。</p>
 
-		<h2 class="ch" id="s2"><span class="ch-no">第二节</span>Fortran</h2>
+<h2 class="ch" id="s2"><span class="ch-no">第二节</span>Fortran</h2>
 
-		<p>1950 年代，John Backus 带领 IBM 团队开发 Fortran。他们想让科学和工程问题可以用公式、循环和数组来表达，把大量机器指令的生成留给编译器。项目于 1954 年启动，编译器在 1957 年推出。<sup class="sn-ref"><a href="#n8" id="r8">8</a></sup><span class="sidenote" id="n8"><span class="sn-no">8</span><a href="https://www.ibm.com/history/john-backus">IBM History：John Backus</a>。</span></p>
+<p>1950 年代，John Backus 带领 IBM 团队开发 Fortran。他们想让科学和工程问题可以用公式、循环和数组来表达，把大量机器指令的生成留给编译器。项目于 1954 年启动，编译器在 1957 年推出。<sup class="sn-ref"><a href="#n8" id="r8">8</a></sup><span class="sidenote" id="n8"><span class="sn-no">8</span><a href="https://www.ibm.com/history/john-backus">IBM History：John Backus</a>。</span></p>
 
-		<p>Fortran 团队的原始论文里，写了一个很小的故事。</p>
+<p>Fortran 团队的原始论文里，写了一个很小的故事。</p>
 
-		<p>一名程序员接受一天培训后，花四小时写出 47 条 Fortran 语句。IBM 704 随后用六分钟，把它们展开成约 1,000 条机器指令。第一次运行的结果不对，他根据输出改写了一条源语句，重新编译，得到了正确的答案。<sup class="sn-ref"><a href="#n9" id="r9">9</a></sup><span class="sidenote" id="n9"><span class="sn-no">9</span>Backus 等，<a href="https://softwarepreservation.computerhistory.org/FORTRAN/paper/BackusEtAl-FortranAutomaticCodingSystem-1957.pdf">The FORTRAN Automatic Coding System</a>，1957。</span></p>
+<p>一名程序员接受一天培训后，花四小时写出 47 条 Fortran 语句。IBM 704 随后用六分钟，把它们展开成约 1,000 条机器指令。第一次运行的结果不对，他根据输出改写了一条源语句，重新编译，得到了正确的答案。<sup class="sn-ref"><a href="#n9" id="r9">9</a></sup><span class="sidenote" id="n9"><span class="sn-no">9</span>Backus 等，<a href="https://softwarepreservation.computerhistory.org/FORTRAN/paper/BackusEtAl-FortranAutomaticCodingSystem-1957.pdf">The FORTRAN Automatic Coding System</a>，1957。</span></p>
 
-		<p>他估计，如果手工编码，需要三天，调试时间另算。这不是所有 Fortran 项目的统一效率，但这一次任务已经足够具体：他不必逐条写出那约一千条机器指令，也能让机器完成自己安排的计算。</p>
+<p>他估计，如果手工编码，需要三天，调试时间另算。这不是所有 Fortran 项目的统一效率，但这一次任务已经足够具体：他不必逐条写出那约一千条机器指令，也能让机器完成自己安排的计算。</p>
 
-		<p>而当时，对编译器的怀疑并不少。习惯手写代码的程序员担心，机器自动生成的指令不够高效。Fortran 的编译器必须在实际机器上证明自己，才能让这种更高层的表达方式被接受。<sup class="sn-ref"><a href="#n10" id="r10">10</a></sup><span class="sidenote" id="n10"><span class="sn-no">10</span><a href="https://www.computerhistory.org/timeline/1957/">Computer History Museum：1957 年时间线</a>。</span></p>
+<p>而当时，对编译器的怀疑并不少。习惯手写代码的程序员担心，机器自动生成的指令不够高效。Fortran 的编译器必须在实际机器上证明自己，才能让这种更高层的表达方式被接受。<sup class="sn-ref"><a href="#n10" id="r10">10</a></sup><span class="sidenote" id="n10"><span class="sn-no">10</span><a href="https://www.computerhistory.org/timeline/1957/">Computer History Museum：1957 年时间线</a>。</span></p>
 
-		<p>人没有因此停止编程。那名程序员仍然要表达算法，也仍然要发现答案不对。变化在于，他修改的是 47 条语句中的一条，而不是重新安排下面约一千条指令的细节。</p>
+<p>人没有因此停止编程。那名程序员仍然要表达算法，也仍然要发现答案不对。变化在于，他修改的是 47 条语句中的一条，而不是重新安排下面约一千条指令的细节。</p>
 
-		<p>我们今天觉得理所当然的“写源码，然后编译”，曾经也是一项需要解释、需要建立信任的新工作方式。</p>
+<p>我们今天觉得理所当然的“写源码，然后编译<span class="pc">”</span>，曾经也是一项需要解释、需要建立信任的新工作方式。</p>
 
-		<p class="excerpt-end">样稿节选至第二节「Fortran」。后文「C &amp; Unix」「Web &amp; Cloud」「AI - 新的抽象层级」「站在更大的尺度面前」从略。</p>
+<h2 class="ch" id="s3"><span class="ch-no">第三节</span>C &amp; Unix</h2>
+
+<p>接下来的变化，发生在软件与硬件的关系里。</p>
+
+<p>1973 年夏天，Unix 内核用 C 重写。几年后，贝尔实验室尝试把它从 PDP-11 搬到架构差异很大的 Interdata 8/32。换机器，原本意味着大量与硬件绑定的工作也要跟着重做。<sup class="sn-ref"><a href="#n11" id="r11">11</a></sup><span class="sidenote" id="n11"><span class="sn-no">11</span>Dennis M. Ritchie，<a href="https://www.bell-labs.com/usr/dmr/www/chist.pdf">The Development of the C Language</a>。</span></p>
+
+<p>团队后来回忆，移植过程中有一段时间，为了把测试系统送到新机器上，他们要先在六楼制作磁带，再拿到一楼的另一台机器上转换记录密度，最后带到五楼的 Interdata 上使用。软件正在摆脱某一台机器的束缚，传递软件的人却还要在楼层之间搬运磁带。<sup class="sn-ref"><a href="#n12" id="r12">12</a></sup><span class="sidenote" id="n12"><span class="sn-no">12</span>S. C. Johnson、Dennis M. Ritchie，<a href="https://www.nokia.com/bell-labs/about/dennis-m-ritchie/portpap.html">Portability of C Programs and the UNIX System</a>。</span></p>
+
+<p>这次迁移却留下了一个重要结果：约六个月后，除设备驱动与汇编原语外，两平台的操作系统源码约 95% 相同；约两万行用户级软件也几乎完全相同。<sup class="sn-ref"><a href="#n13" id="r13">13</a></sup><span class="sidenote" id="n13"><span class="sn-no">13</span>S. C. Johnson、Dennis M. Ritchie，<a href="https://www.nokia.com/bell-labs/about/dennis-m-ritchie/portpap.html">Portability of C Programs and the UNIX System</a>。</span></p>
+
+<p>适配没有消失，但它集中到了更小的边界里。大部分软件不必再随着机器一起重写。程序员开始能够在更稳定的语言和接口上积累自己的工作。</p>
+
+<p>代码因此有机会比承载它的那台机器活得更久。</p>
+
+<p>差不多同一时期，软件自身也在长大。模块化和面向对象的发展，让人可以把系统组织成边界清楚的部分。1972 年，David Parnas 提出，模块应当隐藏那些可能变化的设计决策；Smalltalk 则把对象、图形界面和交互式开发环境放在一起，让编辑、运行与观察结果发生在同一个工作环境中。<sup class="sn-ref"><a href="#n14" id="r14">14</a>,<a href="#n15" id="r15">15</a></sup><span class="sidenote" id="n14"><span class="sn-no">14</span>David L. Parnas，<a href="https://dl.acm.org/doi/10.1145/361598.361623">On the Criteria To Be Used in Decomposing Systems into Modules</a>，1972。</span><span class="sidenote" id="n15"><span class="sn-no">15</span>Computer History Museum 博客，<a href="https://computerhistory.org/blog/introducing-the-smalltalk-zoo-48-years-of-smalltalk-history-at-chm/">Smalltalk Zoo 介绍</a>。</span></p>
+
+<p>人的注意力继续上移。从每条指令怎样执行，转向一个模块应该承担什么职责、两个部分怎样合作，以及未来修改其中一处，会不会牵动整个系统。</p>
+
+<h2 class="ch" id="s4"><span class="ch-no">第四节</span>Web &amp; Cloud</h2>
+
+<p>1990 年底，Tim Berners-Lee 办公室里的一台 NeXT 电脑，运行起第一个 Web 服务器，也运行着第一个浏览器兼编辑器。为了防止被误关，机器上贴着一张提醒：这是一台服务器，不要关机。<sup class="sn-ref"><a href="#n16" id="r16">16</a></sup><span class="sidenote" id="n16"><span class="sn-no">16</span>CERN，<a href="https://home.cern/science/computing/the-birth-of-the-web/short-history-web/">Web 简史</a>。</span></p>
+
+<figure class="fig">
+	<figcaption><span class="fig-no">图 3</span>　曾作为第一台 Web 服务器的 NeXT 工作站，2005 年摄于 CERN 展览，并非 1990 年办公室现场照。摄影：Coolcaesar / <a href="https://commons.wikimedia.org/wiki/File:First_Web_Server.jpg">Wikimedia Commons</a>，<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>，未裁剪。</figcaption>
+	<img src="img/ai-agent-programming-abstraction-image-3.webp" width="1280" height="960" alt="CERN 展出的第一台 Web 服务器 NeXT 工作站" loading="lazy" decoding="async">
+</figure>
+
+<p>这台机器上的第一个网站，介绍的正是 Web 本身：它是什么，怎样使用，怎样搭建自己的服务器与网页。URI、HTTP 和 HTML 把不同机器上的资源接进了一套共同的寻址、传输与展示方式。人可以沿着链接，从一台机器走向另一台机器上的内容。<sup class="sn-ref"><a href="#n17" id="r17">17</a></sup><span class="sidenote" id="n17"><span class="sn-no">17</span>W3C，<a href="https://www.w3.org/People/Berners-Lee/History.html">Tim Berners-Lee 的 Web 历史页面</a>。</span></p>
+
+<p>软件不再只是一份交到别人手里的程序。它也可以是一个持续开放的入口，只要服务器还在运行，远处的人就能访问它。</p>
+
+<p>等这样的服务越来越多，新的麻烦又出现了：谁来安排机器，谁来启动进程，某个实例坏掉以后谁来补上？云平台和集群调度系统，开始接手这些反复发生的工作。</p>
+
+<p>在 Kubernetes 里，开发者可以写下 <code>replicas: 3</code>，表达“让服务持续保持三个副本<span class="pc">”</span>。如果一个 Pod 消失，控制器会创建替代者。人不必每次都亲手安排那次启动，而是告诉平台，系统应当维持什么状态。<sup class="sn-ref"><a href="#n18" id="r18">18</a></sup><span class="sidenote" id="n18"><span class="sn-no">18</span><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Kubernetes 文档：Deployment</a>。</span></p>
+
+<p>从 ENIAC 的电缆，到一份声明服务状态的配置，跨度已经很大。但贯穿其中的变化很相似：人表达的东西越来越接近自己的目的，更多重复的执行细节，被交给下面的工具和平台。</p>
+
+<p>这些层并没有互相抹掉。今天的服务底下，依然有机器指令、编译器、操作系统和网络。只是多数应用开发者，不必每次都从最底层重新走一遍。</p>
+
+<h2 class="ch" id="s5"><span class="ch-no">第五节</span>AI - <wbr>新的抽象层级</h2>
+
+<p>自然语言进入这条历史时，最初还显得像另一种输入方式。</p>
+
+<p>2020 年的 GPT-3 展示了用自然语言指令和少量示例指定任务的能力。到 2021 年，GitHub Copilot 把代码模型放进编辑器：程序员写下一个函数名或一段注释，光标旁边就可能出现下一行，甚至整个函数。<sup class="sn-ref"><a href="#n19" id="r19">19</a>,<a href="#n20" id="r20">20</a></sup><span class="sidenote" id="n19"><span class="sn-no">19</span>Brown 等，<a href="https://papers.neurips.cc/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html">Language Models are Few-Shot Learners</a>，NeurIPS 2020。</span><span class="sidenote" id="n20"><span class="sn-no">20</span>GitHub Blog，<a href="https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/">GitHub Copilot 发布文章</a>，2021。</span></p>
+
+<p>当时，最有代表性的动作是按下 Tab。人选择接受那段建议，或者继续自己写。任务仍然由人串起来：找哪个文件，在哪里调用，怎样运行，报错以后去哪里检查。</p>
+
+<figure class="fig">
+	<figcaption><span class="fig-no">图 4</span>　2021 年 Copilot 技术预览的官方演示：输入函数名后，后续实现被自动补全。截自 GitHub 于 2021 年 7 月发布的回顾视频第 3 秒。 <a href="https://github.blog/news-insights/product-news/whats-new-github-changelog-june-2021/">GitHub</a>。</figcaption>
+	<img src="img/ai-agent-programming-abstraction-image-4.webp" width="1280" height="720" alt="GitHub Copilot 2021 年技术预览中的自动补全演示" loading="lazy" decoding="async">
+</figure>
+
+<p>2022 年以后，对话式模型让这件事更直接了。你可以描述一个需求，请它写一段代码；把代码复制回去运行，再把报错贴进对话。它开始围绕一件事持续修改，但对话框和开发环境之间，仍然需要人来回搬运信息。</p>
+
+<figure class="fig">
+	<figcaption><span class="fig-no">图 5</span>　2022 年 11 月 30 日（美国太平洋时间<span class="pc">）</span>，Riley Goodside 分享的 ChatGPT 编程对话。深灰色聊天界面、Python 代码块和“Copy code”按钮，保留了发布初期的使用样貌。此图为用户截图。 <a href="https://x.com/goodside/status/1598129631609380864">Riley Goodside / X</a>。</figcaption>
+	<img src="img/ai-agent-programming-abstraction-image-5.webp" width="1174" height="1708" alt="2022 年 ChatGPT 编程对话截图" loading="lazy" decoding="async" style="width: min(100%, 467px)">
+</figure>
+
+<p>接下来的两三年，这段搬运工作也开始被工具接过去。Devin、Cursor Agent、Claude Code 等产品陆续把文件、终端、浏览器和测试环境交到模型手里。它不只给出一段答案，还可以试着运行，读取错误，再继续修改。<sup class="sn-ref"><a href="#n21" id="r21">21</a>,<a href="#n22" id="r22">22</a>,<a href="#n23" id="r23">23</a></sup><span class="sidenote" id="n21"><span class="sn-no">21</span>Cognition，<a href="https://cognition.com/blog/introducing-devin">Devin 发布文章</a>。</span><span class="sidenote" id="n22"><span class="sn-no">22</span><a href="https://cursor.com/changelog/0-43-x">Cursor 更新日志</a>，0.43 版本。</span><span class="sidenote" id="n23"><span class="sn-no">23</span>Anthropic，<a href="https://www.anthropic.com/news/claude-3-7-sonnet">Claude 3.7 Sonnet 与 Claude Code 发布文章</a>。</span></p>
+
+<figure class="fig">
+	<figcaption><span class="fig-no">图 6</span>　2025 年 2 月，Claude Code 研究预览版发布时的终端欢迎屏。来源为当时的官方发布素材。 <a href="https://www.anthropic.com/news/claude-3-7-sonnet">Anthropic</a>。</figcaption>
+	<img src="img/ai-agent-programming-abstraction-image-6.webp" width="1440" height="810" alt="Claude Code 研究预览版的终端欢迎屏" loading="lazy" decoding="async">
+</figure>
+
+<p>到 2025 年，GitHub 的 coding agent 可以接收一个 Issue，在独立环境里搜索仓库、修改代码、运行测试，最后提交一份等待审阅的 Pull Request。<sup class="sn-ref"><a href="#n24" id="r24">24</a></sup><span class="sidenote" id="n24"><span class="sn-no">24</span>GitHub Blog，<a href="https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/">Copilot coding agent 发布文章</a>，2025。</span></p>
+
+<figure class="fig">
+	<figcaption><span class="fig-no">图 7</span>　2025 年 5 月，Copilot coding agent 官方演示：开发者在 PR 中要求把 testID 改为必填，Agent 回报已完成修改并附上记录。 <a href="https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/">GitHub</a>。</figcaption>
+	<img src="img/ai-agent-programming-abstraction-image-7.webp" width="1241" height="782" alt="GitHub Copilot coding agent 在 PR 中完成修改的演示" loading="lazy" decoding="async">
+</figure>
+
+<p>从 2021 年到 2025 年，人接受的东西，从光标旁边的一段代码，变成了一轮工程工作的结果。</p>
+
+<p>到了 2026 年，并行任务、独立工作目录、规划与验收，又被放进更完整的工作环境。开发者开始同时安排多个 Agent，并维护它们共同遵守的规则。</p>
+
+<blockquote>
+	<p>Harness工程，可以理解为包围模型的那套工具、环境、上下文与检查机制。<sup class="sn-ref"><a href="#n25" id="r25">25</a>,<a href="#n26" id="r26">26</a></sup><span class="sidenote" id="n25"><span class="sn-no">25</span>OpenAI，<a href="https://openai.com/index/introducing-the-codex-app/">Codex app 发布文章</a>。</span><span class="sidenote" id="n26"><span class="sn-no">26</span>Anthropic 工程博客，<a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">长时运行应用的 harness 设计</a>。</span></p>
+</blockquote>
+
+<p>“抽象层级提升<span class="pc">”</span>，正发生在这里。过去由程序员亲自串联的理解、查找、实现、执行和修正，开始能够作为一段完整的过程被委托出去。人不再只是告诉计算机下一条指令是什么，也开始告诉它：我们要把这件事做成。</p>
+
+<h2 class="ch" id="s6"><span class="ch-no">第六节</span>站在更大的<wbr>尺度面前</h2>
+
+<p>然而，自然语言并不是一份已经写完的源程序。告诉 Agent“做一个内部工具<span class="pc">”</span>，并没有告诉它全部业务规则、数据结构和验收标准。它会补上许多没有被说出来的决定，也可能补错。</p>
+
+<p>所以，Agent 与编译器虽然有着相似的历史位置，却不因此拥有相同的可靠性。新的抽象接走了一部分工作，也带来了新的检查和验证方式。</p>
+
+<p>在一个长周期的项目里，人仍然需要看懂业务，作出取舍，也需要在结果不对的时候进入代码与运行环境。任务可以委托给Agent，但人的经验和判断并不会自然消失。</p>
+
+<p>Linus 在那场对谈里也提醒，面对需要长期维护的项目，人不能只理解提示词，还需要理解最终生成的结果。<sup class="sn-ref"><a href="#n27" id="r27">27</a></sup><span class="sidenote" id="n27"><span class="sn-no">27</span>Linus Torvalds 对谈，YouTube，<a href="https://www.youtube.com/watch?v=fi29pfLcW4I&amp;t=1788s">29:48</a>。</span></p>
+
+<p>项目持续得越久，共同的规则就越重要。产品目标、架构边界和验收条件，需要被写进可以持续维护的文档与测试，而不是每次交给一个新 Agent 重新猜测。</p>
+
+<blockquote>
+	<p>SDD（Spec-Driven Development，规格驱动开发）是围绕这份共同依据组织开发的一种尝试：先写清楚需求、约束和验收标准，再让 Agent 据此拆解任务、编写代码并验证结果。需求变化时，规格也要随之维护，让人和 Agent 都有一份可以检查、持续修订的工作依据。</p>
+</blockquote>
+
+<p>从早年的算法与机器指令，到后来的模块、系统和服务，再到今天的目标、约束与执行环境，人处理问题的尺度一直在放大。</p>
+
+<p>但在新的抽象尺度之下，我们还未形成一个稳定的编程的方法论来指导我们使用agent在一个长期项目内工作。一方面技术依旧在快速变化，agent技术本身还在迭代，另一方面，当下的agent的表现依旧有比较大的提升空间。现在这个阶段更像是Fortran刚出来的那段时间，处于快速变革期。</p>
+
+<p>Agent的发展，也会影响软件的经济边界。</p>
+
+<p>Asana 曾经想迁走一套老旧的 Enzyme 测试框架。按照他们对原方案的估计，这项工作至少要五年，人员成本约 600 万美元。2026 年，他们使用最多四个并行的 Codex Agent，由工程师持续检查并逐项审阅变更，报告在两个日历周内完成迁移，模型与基础设施成本约 1.2 万美元。<sup class="sn-ref"><a href="#n28" id="r28">28</a></sup> 在这个案例里，一项原本被认为漫长、昂贵的迁移，被重新推进并完成了。<span class="sidenote" id="n28"><span class="sn-no">28</span>OpenAI，<a href="https://openai.com/index/asana/">Asana 客户案例</a>。</span></p>
+
+<p>就像高级语言让人不必逐条编排机器指令，Agent 也可能让更多迁移、适配和小众需求进入可承受的范围。</p>
+
+<p>更便宜的实现成本，虽然不会自动带来有价值的产品，但它可能给一些过去被成本挡住的需求，一次成为软件的机会。</p>
+
+<p>回头看，从站在 ENIAC 面板前安排电缆，到坐在屏幕前为 Agent 描述任务，程序员的工作方式已经变了很多次。人与机器之间的表达层越来越高，人能够处理的事情也越来越大。</p>
+
+<p>这就是今天：人类还在编程，只是再一次，把更多“如何实现”交给了工具，开始在更高的一层表达自己的意图。</p>
 	</article>
 </main>
 
-<nav class="next" aria-label="翻页">
-	<div>
-		<span class="label">下一篇</span>
-		<a href="#"><span class="no">02</span><span class="tt">阶段性总结，在大厂<wbr>做了一年半 Agent&nbsp;后</span></a>
+<nav class="chapter-end" aria-label="文末">
+	<p class="source"><a href="https://zhuanlan.zhihu.com/p/2081370754508133635">首发于知乎 →</a></p>
+	<div class="pager">
+		
+		<a class="next" href="agent-engineering-one-and-half-years.html"><span class="label">下一篇</span><span class="no">02</span><span class="tt">阶段性总结，<wbr>在大厂<wbr>做了一年半&nbsp;Agent&nbsp;后</span></a>
 	</div>
-	<p class="source">本文首发于知乎，<a href="https://zhuanlan.zhihu.com/p/2081370754508133635">查看原文</a>。<br>引用与出处见页边注。</p>
+	<p class="back"><a href="index.html#contents">回到目录</a></p>
 </nav>
 
+<footer class="site-foot">
+	<div class="site-foot-inner">
+		<span>邢政的工作笔记　© 2026</span>
+		<nav aria-label="页脚"><a href="https://xz1220.github.io/rss.xml">RSS</a><a href="https://github.com/xz1220">GitHub</a><a href="https://www.zhihu.com/people/xz1220">知乎</a><a href="about.html">关于本站</a></nav>
+	</div>
+</footer>
+
+<script>
+	(function () {
+		var root = document.documentElement;
+		var button = document.querySelector(".theme");
+		var system = window.matchMedia("(prefers-color-scheme: dark)");
+		function isDark() {
+			var t = root.getAttribute("data-theme");
+			return t ? t === "dark" : system.matches;
+		}
+		function sync() {
+			button.setAttribute("aria-pressed", String(isDark()));
+		}
+		button.addEventListener("click", function () {
+			var next = isDark() ? "light" : "dark";
+			root.setAttribute("data-theme", next);
+			try {
+				localStorage.setItem("b-theme", next);
+			} catch (e) {}
+			sync();
+		});
+		system.addEventListener("change", sync);
+		sync();
+	})();
+</script>
 </body>
 </html>

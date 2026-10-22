@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What this blog is for · 邢政的工作笔记</title>
+<script>
+	// Apply a saved 日/夜 choice before first paint; without one, CSS follows the system.
+	(function () {
+		try {
+			var t = localStorage.getItem("b-theme");
+			if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+		} catch (e) {}
+	})();
+</script>
+<link rel="stylesheet" href="../fonts/gf-1043b730e6.css">
+<link rel="stylesheet" href="book.css">
+</head>
+<body class="article">
+
+<header class="runhead">
+	<div class="runhead-inner">
+		<a class="mark" href="index.html">邢政的工作笔记</a>
+		<nav aria-label="主导航">
+			<a href="index.html" aria-current="true">目录</a>
+			<a href="works.html">作品</a>
+			<a href="about.html">关于</a>
+			<span class="toggles">
+				<span class="lang"><a href="hello-world.html" aria-current="true">中</a><span class="slash">/</span><a href="#" lang="en">EN</a></span>
+				<button class="theme" type="button" aria-label="夜读模式" aria-pressed="false"><span class="day">日</span><span class="slash">/</span><span class="night">夜</span></button>
+			</span>
+		</nav>
+	</div>
+</header>
+
+<main class="chapter">
+	<header class="chapter-head">
+		<div>
+			<p class="kicker">附 · <span class="latin">English</span><span class="no letter">A</span></p>
+			<h1 class="chapter-title" lang="en">What this blog is for</h1>
+			<p class="chapter-deck" lang="en">Notes on building AI agents, multi-agent systems, AI products, and knowledge work.</p>
+			<p class="meta"><span class="mi">邢政</span><span class="sep">·</span><span class="mi"><time datetime="2026-06-01">2026-06-01</time></span><span class="sep">·</span><span class="mi">1 min</span><span class="sep">·</span><span class="mi">更新于 <time datetime="2026-08-31">2026-08-31</time></span></p>
+		</div>
+	</header>
+
+	<article class="prose" lang="en">
+<p>This site is where I keep notes on the AI agents and products I build: what they do, how they work, and the decisions behind them.</p>
+
+<p>I’m most interested in practical agent runtimes, multi-agent systems, AI products, and knowledge work—especially the infrastructure that lets solo builders put agent systems into production.</p>
+
+<p>Right now, I’m building <a href="works.html#open-dynamic-workflows">Open Dynamic Workflows</a>, a runtime for portable AI-agent workflows. That is where many of the first notes will begin.</p>
+	</article>
+</main>
+
+<nav class="chapter-end" aria-label="文末">
+	<div class="pager">
+		<a class="prev" href="workplace-politics-lessons.html"><span class="label">上一篇</span><span class="no">05</span><span class="tt">聊聊工作的<wbr>“厚黑学”</span></a>
+		
+	</div>
+	<p class="back"><a href="index.html#contents">回到目录</a></p>
+</nav>
+
+<footer class="site-foot">
+	<div class="site-foot-inner">
+		<span>邢政的工作笔记　© 2026</span>
+		<nav aria-label="页脚"><a href="https://xz1220.github.io/rss.xml">RSS</a><a href="https://github.com/xz1220">GitHub</a><a href="https://www.zhihu.com/people/xz1220">知乎</a><a href="about.html">关于本站</a></nav>
+	</div>
+</footer>
+
+<script>
+	(function () {
+		var root = document.documentElement;
+		var button = document.querySelector(".theme");
+		var system = window.matchMedia("(prefers-color-scheme: dark)");
+		function isDark() {
+			var t = root.getAttribute("data-theme");
+			return t ? t === "dark" : system.matches;
+		}
+		function sync() {
+			button.setAttribute("aria-pressed", String(isDark()));
+		}
+		button.addEventListener("click", function () {
+			var next = isDark() ? "light" : "dark";
+			root.setAttribute("data-theme", next);
+			try {
+				localStorage.setItem("b-theme", next);
+			} catch (e) {}
+			sync();
+		});
+		system.addEventListener("change", sync);
+		sync();
+	})();
+</script>
+</body>
+</html>
