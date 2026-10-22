@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>书法字体对比 · danielxing 的笔记</title>
-<link rel="stylesheet" href="fonts/gf-f19c64d5a3.css">
+<title>标题书法字体 · danielxing 的笔记</title>
+<link rel="stylesheet" href="fonts/gf-098bb9b062.css">
 <style>
 	:root {
 		--paper: #f7f4ec;
@@ -15,175 +15,137 @@
 		--rule: #e3ddd0;
 		--accent: #b5402a;
 		--serif: "Source Serif 4", "Noto Serif SC", serif;
+		--xingshu: "Zhi Mang Xing", "Noto Serif SC", serif;
 	}
 	* { box-sizing: border-box; }
-	body {
-		margin: 0;
-		background: var(--paper);
-		color: var(--ink);
-		font: 400 16px/1.8 var(--serif);
-		text-autospace: normal;
-	}
-	.wrap { max-width: 1120px; margin: 0 auto; padding: 56px 28px 96px; }
-	.intro h1 { margin: 0 0 8px; font: 900 34px/1.3 var(--serif); }
-	.intro p { margin: 0; max-width: 46em; color: var(--ink-2); }
-	.card { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--ink); }
-	.card > header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 26px; }
-	.card h2 { margin: 0; font: 600 20px/1.4 var(--serif); }
-	.card h2 .meta { margin-left: 4px; font: 400 13px/1.4 "Noto Serif SC", serif; color: var(--muted); }
-	.card header p { flex-basis: 100%; margin: 0; font-size: 14.5px; color: var(--muted); }
-	.tag { font: 600 12px/1 "Noto Serif SC", serif; color: var(--accent); border: 1px solid currentColor; border-radius: 3px; padding: 3px 6px; }
+	body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.8 var(--serif); text-autospace: normal; }
+	.wrap { max-width: 1160px; margin: 0 auto; padding: 56px 28px 96px; }
+	h1 { margin: 0 0 8px; font: 900 32px/1.3 var(--serif); }
+	.lead { margin: 0; max-width: 48em; color: var(--ink-2); }
+	.lead b { color: var(--ink); }
+	h2.section { margin: 56px 0 6px; font: 600 19px/1.4 var(--serif); }
+	.section-note { margin: 0 0 22px; font-size: 14.5px; color: var(--muted); }
 
-	.spread { display: grid; grid-template-columns: 290px 1px minmax(0, 1fr); gap: 0 52px; }
-	.gutter { background: var(--rule); }
-	.book-title { margin: 8px 0 0; font: 400 64px/1.12 var(--cal); }
-	.book-title .latin { font: 900 56px/1.14 var(--serif); letter-spacing: 0; }
-	.title-rule { width: 40px; height: 1px; margin: 26px 0 14px; border: 0; background: var(--ink); }
-	.byline { margin: 0; font-size: 14.5px; color: var(--muted); }
-	.alt { margin-top: 26px; font-size: 13px; color: var(--muted); }
-	.alt span { display: block; margin-top: 4px; font: 400 34px/1.3 var(--cal); color: var(--ink); }
+	.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+	.card { padding: 22px 26px 24px; background: rgba(255, 255, 255, 0.45); border: 1px solid var(--rule); border-radius: 6px; }
+	.card.current { border-color: var(--ink-2); }
+	.label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-bottom: 18px; }
+	.label b { font: 600 16px/1.4 var(--serif); }
+	.label .meta { font: 400 12.5px/1.4 "Noto Sans SC", sans-serif; color: var(--muted); }
+	.label .tag { font: 500 11.5px/1 "Noto Sans SC", sans-serif; color: var(--accent); border: 1px solid currentColor; border-radius: 3px; padding: 3px 5px; }
 
-	.contents-title { margin: 6px 0 18px; font: 400 52px/1.1 var(--cal); }
-	.contents-title em { margin-left: 10px; font: italic 400 17px/1 "Source Serif 4", serif; color: var(--muted); }
-	.part { display: flex; gap: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--ink); font: 600 15px/1.4 "Noto Serif SC", serif; }
-	.part b { color: var(--accent); font-weight: 600; }
-	.entry { display: grid; grid-template-columns: 64px minmax(0, 1fr); padding: 16px 0; border-bottom: 1px solid var(--rule); }
-	.entry .no { font: 400 34px/1 "Source Serif 4", serif; color: var(--accent); }
-	.entry .t { font: 600 21px/1.5 "Noto Serif SC", serif; }
-	.entry .d { display: block; font-size: 14px; color: var(--muted); }
-	.article { margin-top: 26px; padding: 22px 26px 6px; background: rgba(0, 0, 0, 0.025); border-radius: 4px; }
-	.article .kicker { font: 400 12.5px/1.4 "Noto Serif SC", serif; color: var(--muted); letter-spacing: 0.08em; }
-	.article h3 { margin: 8px 0 12px; font: 400 46px/1.25 var(--cal); word-break: keep-all; text-wrap: balance; }
-	.article p { margin: 0 0 16px; max-width: 36em; font-size: 17px; line-height: 1.85; color: var(--ink-2); }
+	/* 扉页 title: the Latin run takes the candidate face, the Chinese run takes 行书. */
+	.title { margin: 0; line-height: 1.12; }
+	.title .en { display: block; font-family: var(--en); font-size: var(--en-size); font-weight: var(--en-weight, 400); letter-spacing: 0; line-height: 1.15; }
+	.title .zh { display: block; margin-top: 4px; font: 400 64px/1.1 var(--xingshu); }
+	.rule { width: 40px; height: 1px; margin: 20px 0 12px; border: 0; background: var(--ink); }
+	.byline { margin: 0; font-size: 14px; color: var(--muted); }
+	.heading { margin: 26px 0 8px; padding-top: 18px; border-top: 1px solid var(--rule); font: 400 46px/1.15 var(--xingshu); }
+	.heading .en { margin-left: 12px; font-family: var(--en); font-size: calc(var(--en-size) * 0.42); font-weight: var(--en-weight, 400); color: var(--muted); }
+	.body { margin: 0; font: 400 16px/1.85 var(--serif); color: var(--ink-2); }
 
-	/* The baseline card shows the current design: everything in Noto Serif SC 900. */
-	.baseline .book-title, .baseline .contents-title, .baseline .article h3 { font-weight: 900; }
+	/* Header nav: current small serif vs 行书 tabs. */
+	.navs { display: grid; gap: 14px; }
+	.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: rgba(255, 255, 255, 0.45); border: 1px solid var(--rule); border-radius: 6px; }
+	.nav .mark { font: 600 15px/1 var(--serif); }
+	.nav .mark .zh-x { font: 400 24px/1 var(--xingshu); }
+	.nav ul { display: flex; gap: 26px; margin: 0; padding: 0; list-style: none; font: 400 14px/1 "Noto Sans SC", sans-serif; letter-spacing: 0.1em; }
+	.nav.xs ul { font: 400 23px/1 var(--xingshu); letter-spacing: 0.02em; }
+	.nav li:first-child { border-bottom: 1px solid var(--ink); padding-bottom: 3px; }
+	.nav .which { font: 400 12.5px/1 "Noto Sans SC", sans-serif; color: var(--muted); }
 
-	@media (max-width: 820px) {
-		.spread { grid-template-columns: minmax(0, 1fr); }
-		.gutter { display: none; }
-		.book-title { font-size: 52px; }
-		.book-title .latin { font-size: 44px; }
-		.contents-title { margin-top: 30px; font-size: 44px; }
-		.article h3 { font-size: 36px; }
+	.pages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+	.pages div { padding: 20px 22px; background: rgba(255, 255, 255, 0.45); border: 1px solid var(--rule); border-radius: 6px; }
+	.pages b { display: block; font: 400 60px/1.1 var(--xingshu); }
+	.pages span { font-size: 13px; color: var(--muted); }
+
+	@media (max-width: 860px) {
+		.grid, .pages { grid-template-columns: minmax(0, 1fr); }
+		.nav ul { gap: 14px; }
 	}
 </style>
 </head>
 <body>
 <main class="wrap">
-	<section class="intro">
-		<h1>书法字体对比</h1>
-		<p>四款都是 SIL Open Font License 开源授权，可以免费嵌入网页，并且都完整收录了 GB2312 的 6763 个汉字，当前所有标题用到的字都在。每张卡片里，书法体只替换站名、栏目标题和文章标题，目录条目和正文仍用思源宋体，英文 “danielxing” 仍用 Source Serif。</p>
-	</section>
+	<h1>标题用书法字体</h1>
+	<p class="lead">按你的要求：<b>中文标题用行书（志莽行书），英文标题用书法感的字体，正文不动。</b>下面每张卡片的中文都一样，只换英文 “danielxing” 和 “Contents” 的字体。所有字体都是 SIL Open Font License，可免费用于网站。</p>
 
-	<section class="card baseline" style="--cal: 'Noto Serif SC', serif">
-		<header>
-			<h2>现在：思源宋体<span class="meta">Noto Serif SC · 900</span></h2>
-			<span class="tag">现用</span>
-			<p>线上正在用的样子，作为对照。</p>
-		</header>
-		<div class="spread">
-			<div>
-				<div class="book-title"><span class="latin">danielxing</span><br>的笔记</div>
-				<hr class="title-rule"><p class="byline">Daniel Xing</p>
-			</div>
-			<div class="gutter"></div>
-			<div>
-				<div class="contents-title">目录<em>Contents</em></div>
-				<div class="part"><b>卷一</b>Agent 工程</div>
-				<div class="entry"><span class="no">01</span><span class="t">人类只是再次提升了编程的抽象层级<span class="d">从接线器到 Agent，人的意图正在更高层被表达。</span></span></div>
-				<div class="article"><div class="kicker">文章页标题</div><h3>人类只是再次提升了<wbr>编程的抽象层级</h3><p>2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。他随即拿编译器打了个比方。</p></div>
-			</div>
-		</div>
-	</section>
+	<h2 class="section">一、英文配哪种字体</h2>
+	<p class="section-note">西方也有书法：意大利斜体（chancery）、铜版体、签名体。视觉上最接近中国毛笔行书的是「毛笔手写体」。</p>
 
-	<section class="card" style="--cal: 'Zhi Mang Xing', 'Noto Serif SC', serif">
-		<header>
-			<h2>志莽行书<span class="meta">Zhi Mang Xing · Wei Zhimang · 行书</span></h2>
-			<span class="tag">行书</span>
-			<p>毛笔行书，笔势连贯，有明显的书写感。四款里最接近“行楷 / 行书”的要求。</p>
-		</header>
-		<div class="spread">
-			<div>
-				<div class="book-title"><span class="latin">danielxing</span><br>的笔记</div>
-				<hr class="title-rule"><p class="byline">Daniel Xing</p>
-				<p class="alt">英文也用书法体：<span>danielxing 的笔记</span></p>
-			</div>
-			<div class="gutter"></div>
-			<div>
-				<div class="contents-title">目录<em>Contents</em></div>
-				<div class="part"><b>卷一</b>Agent 工程</div>
-				<div class="entry"><span class="no">01</span><span class="t">人类只是再次提升了编程的抽象层级<span class="d">从接线器到 Agent，人的意图正在更高层被表达。</span></span></div>
-				<div class="article"><div class="kicker">文章页标题（可选）</div><h3>人类只是再次提升了<wbr>编程的抽象层级</h3><p>2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。他随即拿编译器打了个比方。</p></div>
-			</div>
-		</div>
-	</section>
+	<div class="grid">
+		<section class="card current" style="--en: 'Source Serif 4', serif; --en-size: 54px; --en-weight: 900">
+			<div class="label"><b>保留现在的英文</b><span class="meta">Source Serif 4 · 衬线粗体</span><span class="tag">现用</span></div>
+			<p class="title"><span class="en">danielxing</span><span class="zh">的笔记</span></p>
+			<hr class="rule"><p class="byline">Daniel Xing</p>
+			<div class="heading">目录<span class="en">Contents</span></div>
+			<p class="body">正文不变：2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。</p>
+		</section>
 
-	<section class="card" style="--cal: 'Long Cang', 'Noto Serif SC', serif">
-		<header>
-			<h2>龙藏体<span class="meta">Long Cang · Chen Xiaomin · 行书</span></h2>
-			<span class="tag">行书</span>
-			<p>偏硬笔的行书手写，笔画细，更像随手写下的笔记。</p>
-		</header>
-		<div class="spread">
-			<div>
-				<div class="book-title"><span class="latin">danielxing</span><br>的笔记</div>
-				<hr class="title-rule"><p class="byline">Daniel Xing</p>
-				<p class="alt">英文也用书法体：<span>danielxing 的笔记</span></p>
-			</div>
-			<div class="gutter"></div>
-			<div>
-				<div class="contents-title">目录<em>Contents</em></div>
-				<div class="part"><b>卷一</b>Agent 工程</div>
-				<div class="entry"><span class="no">01</span><span class="t">人类只是再次提升了编程的抽象层级<span class="d">从接线器到 Agent，人的意图正在更高层被表达。</span></span></div>
-				<div class="article"><div class="kicker">文章页标题（可选）</div><h3>人类只是再次提升了<wbr>编程的抽象层级</h3><p>2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。他随即拿编译器打了个比方。</p></div>
-			</div>
-		</div>
-	</section>
+		<section class="card" style="--en: 'Zhi Mang Xing', cursive; --en-size: 62px">
+			<div class="label"><b>志莽行书自带的英文</b><span class="meta">Zhi Mang Xing · 和中文同一支笔</span><span class="tag">最协调</span></div>
+			<p class="title"><span class="en">danielxing</span><span class="zh">的笔记</span></p>
+			<hr class="rule"><p class="byline">Daniel Xing</p>
+			<div class="heading">目录<span class="en">Contents</span></div>
+			<p class="body">正文不变：2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。</p>
+		</section>
 
-	<section class="card" style="--cal: 'Ma Shan Zheng', 'Noto Serif SC', serif">
-		<header>
-			<h2>马善政楷书<span class="meta">Ma Shan Zheng · Ma ShanZheng · 毛笔楷书</span></h2>
-			<span class="tag">楷书</span>
-			<p>毛笔楷书，端正、好认。不算行楷，但书法味足，标题放大后也稳重。</p>
-		</header>
-		<div class="spread">
-			<div>
-				<div class="book-title"><span class="latin">danielxing</span><br>的笔记</div>
-				<hr class="title-rule"><p class="byline">Daniel Xing</p>
-				<p class="alt">英文也用书法体：<span>danielxing 的笔记</span></p>
-			</div>
-			<div class="gutter"></div>
-			<div>
-				<div class="contents-title">目录<em>Contents</em></div>
-				<div class="part"><b>卷一</b>Agent 工程</div>
-				<div class="entry"><span class="no">01</span><span class="t">人类只是再次提升了编程的抽象层级<span class="d">从接线器到 Agent，人的意图正在更高层被表达。</span></span></div>
-				<div class="article"><div class="kicker">文章页标题（可选）</div><h3>人类只是再次提升了<wbr>编程的抽象层级</h3><p>2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。他随即拿编译器打了个比方。</p></div>
-			</div>
-		</div>
-	</section>
+		<section class="card" style="--en: 'Kaushan Script', cursive; --en-size: 54px">
+			<div class="label"><b>毛笔刷写</b><span class="meta">Kaushan Script · Impallari Type</span><span class="tag">毛笔</span></div>
+			<p class="title"><span class="en">danielxing</span><span class="zh">的笔记</span></p>
+			<hr class="rule"><p class="byline">Daniel Xing</p>
+			<div class="heading">目录<span class="en">Contents</span></div>
+			<p class="body">正文不变：2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。</p>
+		</section>
 
-	<section class="card" style="--cal: 'Liu Jian Mao Cao', 'Noto Serif SC', serif">
-		<header>
-			<h2>柳建毛草<span class="meta">Liu Jian Mao Cao · Liu Zhengjiang 等 · 草书</span></h2>
-			<span class="tag">草书</span>
-			<p>毛笔草书，比行书更放，作为参照放在这里：长标题会比较难认。</p>
-		</header>
-		<div class="spread">
-			<div>
-				<div class="book-title"><span class="latin">danielxing</span><br>的笔记</div>
-				<hr class="title-rule"><p class="byline">Daniel Xing</p>
-				<p class="alt">英文也用书法体：<span>danielxing 的笔记</span></p>
-			</div>
-			<div class="gutter"></div>
-			<div>
-				<div class="contents-title">目录<em>Contents</em></div>
-				<div class="part"><b>卷一</b>Agent 工程</div>
-				<div class="entry"><span class="no">01</span><span class="t">人类只是再次提升了编程的抽象层级<span class="d">从接线器到 Agent，人的意图正在更高层被表达。</span></span></div>
-				<div class="article"><div class="kicker">文章页标题（可选）</div><h3>人类只是再次提升了<wbr>编程的抽象层级</h3><p>2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。他随即拿编译器打了个比方。</p></div>
-			</div>
-		</div>
-	</section>
+		<section class="card" style="--en: 'Mr Dafoe', cursive; --en-size: 70px">
+			<div class="label"><b>毛笔连写</b><span class="meta">Mr Dafoe · Sudtipos</span><span class="tag">毛笔</span></div>
+			<p class="title"><span class="en">danielxing</span><span class="zh">的笔记</span></p>
+			<hr class="rule"><p class="byline">Daniel Xing</p>
+			<div class="heading">目录<span class="en">Contents</span></div>
+			<p class="body">正文不变：2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。</p>
+		</section>
+
+		<section class="card" style="--en: 'Kolker Brush', cursive; --en-size: 80px">
+			<div class="label"><b>细毛笔</b><span class="meta">Kolker Brush · Robert Leuschke</span><span class="tag">毛笔</span></div>
+			<p class="title"><span class="en">danielxing</span><span class="zh">的笔记</span></p>
+			<hr class="rule"><p class="byline">Daniel Xing</p>
+			<div class="heading">目录<span class="en">Contents</span></div>
+			<p class="body">正文不变：2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。</p>
+		</section>
+
+		<section class="card" style="--en: 'Mrs Saint Delafield', cursive; --en-size: 84px">
+			<div class="label"><b>签名体</b><span class="meta">Mrs Saint Delafield · Sudtipos</span><span class="tag">钢笔签名</span></div>
+			<p class="title"><span class="en">danielxing</span><span class="zh">的笔记</span></p>
+			<hr class="rule"><p class="byline">Daniel Xing</p>
+			<div class="heading">目录<span class="en">Contents</span></div>
+			<p class="body">正文不变：2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。</p>
+		</section>
+
+		<section class="card" style="--en: 'Tangerine', cursive; --en-size: 90px; --en-weight: 700">
+			<div class="label"><b>西方传统书法</b><span class="meta">Tangerine · Toshi Omagari · 意大利斜体</span><span class="tag">西式书法</span></div>
+			<p class="title"><span class="en">danielxing</span><span class="zh">的笔记</span></p>
+			<hr class="rule"><p class="byline">Daniel Xing</p>
+			<div class="heading">目录<span class="en">Contents</span></div>
+			<p class="body">正文不变：2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。</p>
+		</section>
+	</div>
+
+	<h2 class="section">二、栏目页的大标题（左侧扉页）</h2>
+	<p class="section-note">目录、作品、关于、标签各页左侧的大标题，都换成行书。</p>
+	<div class="pages">
+		<div><b>目录</b><span>首页 / 文章列表</span></div>
+		<div><b>作品</b><span>作品页</span></div>
+		<div><b>关于</b><span>关于页</span></div>
+		<div><b>标签</b><span>标签页</span></div>
+	</div>
+
+	<h2 class="section">三、页眉导航要不要也换（可选）</h2>
+	<p class="section-note">导航字小、天天点，我倾向保持现状；放在这里给你对比。</p>
+	<div class="navs">
+		<div class="nav"><span class="mark">danielxing <span class="zh-x">的笔记</span></span><ul><li>目录</li><li>作品</li><li>关于</li></ul><span class="which">导航保持现状</span></div>
+		<div class="nav xs"><span class="mark">danielxing <span class="zh-x">的笔记</span></span><ul><li>目录</li><li>作品</li><li>关于</li></ul><span class="which">导航也用行书</span></div>
+	</div>
 </main>
 </body>
 </html>
