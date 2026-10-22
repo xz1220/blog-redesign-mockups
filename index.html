@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>博客改版样稿 · 三个方向</title>
+<style>
+  :root { --paper:#f4f3ef; --ink:#151513; --muted:#6c6a63; --line:#dedbd2; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink);
+    font: 15px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans SC", sans-serif; }
+  header { max-width: 1400px; margin: 0 auto; padding: 40px 32px 8px; }
+  h1 { font-size: 28px; margin: 0 0 6px; }
+  header p { margin: 0; color: var(--muted); }
+  main { max-width: 1400px; margin: 0 auto; padding: 24px 32px 64px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  section { border-top: 1px solid var(--line); padding-top: 16px; }
+  h2 { font-size: 18px; margin: 0 0 4px; }
+  .tag { font: 12px/1.4 ui-monospace, Menlo, monospace; color: var(--muted); margin: 0 0 10px; }
+  .links { display: flex; gap: 14px; margin: 0 0 12px; font-size: 14px; }
+  .links a { color: inherit; }
+  .thumb { display: block; height: 560px; overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+  .thumb img { width: 100%; display: block; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .pair a { display: block; height: 220px; overflow: hidden; border: 1px solid var(--line); border-radius: 6px; }
+  .pair img { width: 100%; display: block; }
+  ul { margin: 12px 0 0; padding-left: 18px; color: #33322d; font-size: 14px; }
+  @media (max-width: 1000px) { main { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>博客改版样稿 · 三个方向</h1>
+  <p>同一份真实内容（6 篇文章、公开仓库），三种身份表达。点缩略图看大图，点“打开页面”看可交互的 HTML。</p>
+</header>
+<main>
+  <section>
+    <h2>A · 运行日志 Run Log</h2>
+    <p class="tag">与 ODW 站同一视觉家族 · 签名元素：职业 trace 瀑布图</p>
+    <p class="links"><a href="a-runlog/index.html">打开首页</a><a href="a-runlog/article.html">打开文章页</a></p>
+    <a class="thumb" href="a-runlog/shots/home-1440.png"><img src="a-runlog/shots/home-1440.png" alt="方案 A 首页"></a>
+    <div class="pair">
+      <a href="a-runlog/shots/article-1440.png"><img src="a-runlog/shots/article-1440.png" alt="方案 A 文章页"></a>
+      <a href="a-runlog/shots/home-390.png"><img src="a-runlog/shots/home-390.png" alt="方案 A 手机首页"></a>
+    </div>
+  </section>
+  <section>
+    <h2>B · 长文书房 The Book</h2>
+    <p class="tag">中文优先的书籍排印 · 签名元素：目录首页 + 边注</p>
+    <p class="links"><a href="b-book/index.html">打开首页</a><a href="b-book/article.html">打开文章页</a></p>
+    <a class="thumb" href="b-book/shots/home-1440.png"><img src="b-book/shots/home-1440.png" alt="方案 B 首页"></a>
+    <div class="pair">
+      <a href="b-book/shots/article-1440-mid.png"><img src="b-book/shots/article-1440-mid.png" alt="方案 B 文章页边注"></a>
+      <a href="b-book/shots/home-390.png"><img src="b-book/shots/home-390.png" alt="方案 B 手机首页"></a>
+    </div>
+  </section>
+  <section>
+    <h2>C · 终端 Terminal</h2>
+    <p class="tag">延续 GitHub 主页 CRT 终端 · 签名元素：whoami 会话 + 键盘导航</p>
+    <p class="links"><a href="c-terminal/index.html">打开首页</a><a href="c-terminal/article.html">打开文章页</a></p>
+    <a class="thumb" href="c-terminal/shots/home-1440.png"><img src="c-terminal/shots/home-1440.png" alt="方案 C 首页"></a>
+    <div class="pair">
+      <a href="c-terminal/shots/article-1440.png"><img src="c-terminal/shots/article-1440.png" alt="方案 C 文章页"></a>
+      <a href="c-terminal/shots/home-390.png"><img src="c-terminal/shots/home-390.png" alt="方案 C 手机首页"></a>
+    </div>
+  </section>
+</main>
+</body>
+</html>

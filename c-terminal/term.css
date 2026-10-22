@@ -1,0 +1,202 @@
+/* 方案 C「终端」— shared tokens + chrome.
+   Greens are lifted 1:1 from profile-crt.svg so the GitHub profile and the site read as one screen. */
+:root {
+	--bg: #0b100d; /* page around the monitor */
+	--bezel: #1f3020; /* svg: monitor frame stroke */
+	--bezel-outer: #071009; /* svg: frame fill */
+	--screen: #0e1612; /* panel, a step lighter than the page */
+	--glass: #173721; /* svg: radial glass centre */
+	--rule: #487143; /* svg: rule under the prompt */
+	--phosphor: #a9e898; /* svg: prompt */
+	--label: #88c578; /* svg: field labels */
+	--value: #b1e89c; /* svg: field values */
+	--beam: #b5ffb4; /* svg: scan beam, brightest green */
+	--text: #dfe9e1;
+	--text-hi: #eef5ef;
+	--muted: #8aa392;
+	--font-mono: "JetBrains Mono", "Noto Sans SC", ui-monospace, monospace;
+	--font-read: "Noto Sans SC", "PingFang SC", system-ui, sans-serif;
+	color-scheme: dark;
+}
+
+* {
+	box-sizing: border-box;
+}
+html {
+	-webkit-text-size-adjust: 100%;
+}
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font: 15px/1.7 var(--font-mono);
+	font-variant-numeric: tabular-nums;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+:focus-visible {
+	outline: 2px solid var(--beam);
+	outline-offset: 2px;
+}
+
+/* ---------- monitor frame ---------- */
+.crt {
+	max-width: 1100px;
+	margin: 28px auto 16px;
+	border: 10px solid var(--bezel);
+	border-radius: 30px;
+	box-shadow: 0 0 0 6px var(--bezel-outer);
+	background: var(--screen);
+	overflow: clip; /* clip, not hidden: keeps position:sticky working */
+}
+.screen {
+	box-shadow: inset 0 0 90px rgb(0 0 0 / 0.42);
+}
+
+/* ---------- tmux status line = site nav ---------- */
+.tmux {
+	display: flex;
+	align-items: center;
+	gap: 0;
+	background: var(--label);
+	color: #08110b;
+	font-size: 13px;
+	line-height: 1;
+	white-space: nowrap;
+}
+.tmux > * {
+	padding: 8px 10px;
+}
+.tmux .session {
+	padding-left: 22px;
+	font-weight: 700;
+}
+.tmux .win {
+	display: inline-block;
+}
+.tmux .win:hover {
+	background: var(--value);
+}
+.tmux .win[aria-current] {
+	background: #08110b;
+	color: var(--value);
+	font-weight: 700;
+}
+.tmux .right {
+	margin-left: auto;
+	padding-right: 22px;
+	display: flex;
+	gap: 14px;
+}
+.tmux .lang b {
+	font-weight: 700;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+/* ---------- prompt lines ---------- */
+.cmd {
+	margin: 0 0 14px;
+	font: 500 15px/1.6 var(--font-mono);
+	color: var(--text-hi);
+	overflow-wrap: anywhere;
+}
+.ps1 {
+	color: var(--phosphor);
+	text-shadow: 0 0 0.4em rgb(169 232 152 / 0.3);
+}
+.ps1 .path {
+	color: var(--label);
+}
+
+.cursor {
+	display: inline-block;
+	width: 0.62em;
+	height: 1.15em;
+	vertical-align: -0.2em;
+	background: var(--phosphor);
+	box-shadow: 0 0 0.5em rgb(169 232 152 / 0.45);
+	animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink {
+	50% {
+		opacity: 0;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.cursor {
+		animation: none;
+	}
+}
+
+/* ---------- key-hint / less status bars ---------- */
+.keys {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 22px;
+	padding: 10px 22px;
+	border-top: 1px solid rgb(72 113 67 / 0.55);
+	color: var(--muted);
+	font-size: 13px;
+}
+kbd {
+	font: inherit;
+	color: var(--phosphor);
+}
+
+.colophon {
+	max-width: 1100px;
+	margin: 0 auto 36px;
+	padding: 0 24px;
+	color: var(--muted);
+	font-size: 12.5px;
+}
+.colophon a {
+	text-decoration: underline;
+	text-decoration-color: rgb(138 163 146 / 0.5);
+	text-underline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+	body {
+		font-size: 14px;
+	}
+	.crt {
+		margin: 10px 8px 12px;
+		border-width: 5px;
+		border-radius: 18px;
+		box-shadow: 0 0 0 3px var(--bezel-outer);
+	}
+	.tmux {
+		font-size: 12px;
+	}
+	.tmux > * {
+		padding: 8px 7px;
+	}
+	.tmux .session,
+	.tmux .search {
+		display: none;
+	}
+	.tmux .win:first-of-type {
+		padding-left: 12px;
+	}
+	.tmux .right {
+		padding-right: 12px;
+	}
+	.cmd {
+		font-size: 13.5px;
+	}
+	.colophon {
+		padding: 0 14px;
+	}
+}

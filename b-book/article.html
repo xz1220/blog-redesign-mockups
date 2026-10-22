@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>人类只是再次提升了编程的抽象层级 · 邢政的工作笔记</title>
+<link rel="stylesheet" href="../fonts/gf-1043b730e6.css">
+<link rel="stylesheet" href="book.css">
+</head>
+<body class="article">
+
+<header class="runhead">
+	<div class="runhead-inner">
+		<a class="mark" href="index.html">邢政的工作笔记</a>
+		<nav aria-label="主导航">
+			<a href="index.html#contents" aria-current="page">目录</a>
+			<a href="index.html#works">作品</a>
+			<a href="index.html#colophon">关于</a>
+			<span class="lang"><a href="article.html" aria-current="true">中</a><span class="slash">/</span><a href="#" lang="en">EN</a></span>
+		</nav>
+	</div>
+</header>
+
+<main class="chapter">
+	<header class="chapter-head">
+		<div>
+			<p class="kicker">卷一 · <span class="latin">Agent</span> 工程<span class="no">01</span></p>
+			<h1 class="chapter-title">人类只是再次提升了<wbr>编程的抽象层级</h1>
+			<p class="chapter-deck">从接线器到 Agent，<wbr>人的意图正在更高层被表达。</p>
+			<p class="meta"><span class="mi">邢政</span><span class="sep">·</span><span class="mi"><time datetime="2026-09-02">2026-09-02</time></span><span class="sep">·</span><span class="mi">22 分钟</span><span class="sep">·</span><span class="mi">更新于 <time datetime="2026-09-24">2026-09-24</time></span><span class="sep">·</span><span class="mi"><a href="https://zhuanlan.zhihu.com/p/2081370754508133635">首发于知乎</a></span></p>
+		</div>
+		<nav class="chapter-toc" aria-labelledby="toc-title">
+			<h2 id="toc-title">本篇</h2>
+			<ol>
+				<li><span>一</span><a href="#s1">接线器</a></li>
+				<li><span>二</span><a href="#s2">Fortran</a></li>
+				<li><span>三</span><a href="#s3">C &amp; Unix</a></li>
+				<li><span>四</span><a href="#">Web &amp; Cloud</a></li>
+				<li><span>五</span><a href="#">AI - 新的抽象层级</a></li>
+				<li><span>六</span><a href="#">站在更大的尺度面前</a></li>
+			</ol>
+		</nav>
+	</header>
+
+	<figure class="frontispiece">
+		<img src="../assets/the-architects-dream.jpg" width="1920" height="1180" alt="托马斯·科尔《建筑师之梦》：沉睡的建筑师躺在巨型柱头上，眼前层叠展开从埃及金字塔、希腊罗马神殿到哥特教堂的建筑文明。">
+		<figcaption>卷首图　<span lang="en" class="latin">Thomas Cole, The Architect’s Dream, 1840 · Toledo Museum of Art ·</span> <a href="https://commons.wikimedia.org/wiki/File:Thomas_Cole_-_Architect%E2%80%99s_Dream_-_Google_Art_Project.jpg">Public domain</a></figcaption>
+	</figure>
+
+	<article class="prose">
+		<p>2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI 编写。他随即拿编译器打了个比方：</p>
+
+		<blockquote class="quote-en" lang="en">
+			<p>“100% of their code is written by compilers. But they never say that.”</p>
+			<footer>— Linus Torvalds</footer>
+		</blockquote>
+
+		<p>程序早就经过工具生成，只是过去人们不这样谈论它。他随后说，AI 正在改变编程的方式，却没有改变编程的基本问题。<sup class="sn-ref"><a href="#n1" id="r1">1</a></sup><span class="sidenote" id="n1"><span class="sn-no">1</span>Linus Torvalds 对谈，YouTube，<a href="https://www.youtube.com/watch?v=fi29pfLcW4I&amp;t=1569s">26:09</a> 与 <a href="https://www.youtube.com/watch?v=fi29pfLcW4I&amp;t=1649s">27:29</a>。</span></p>
+
+		<p>一个月后，Claude Code 核心建设者 Boris Cherny 在另一场访谈里，讲起自己的家庭：祖父使用穿孔卡，父亲写汇编，到了他这一代，使用 Java、JavaScript 和 Python。他说，编程的抽象层级总是在上升。<sup class="sn-ref"><a href="#n2" id="r2">2</a></sup><span class="sidenote" id="n2"><span class="sn-no">2</span>Boris Cherny 访谈，YouTube，<a href="https://www.youtube.com/watch?v=RkQQ7WEor7w&amp;t=613s">10:13</a>。</span></p>
+
+		<p>而他自己的工作，也从在编辑器里写代码，变成同时运行多个 Claude，再变成编写自动运行的循环，让这些循环提示 Claude、判断下一步。他用一句话描述现在的工作：</p>
+
+		<blockquote class="quote-en" lang="en">
+			<p>“My job is to write loops.”</p>
+			<footer>— Boris Cherny</footer>
+		</blockquote>
+
+		<p>其实程序员的工作不仅仅是编码。我们不会因为机器码是编译器生成的，就认为程序员没有在 coding；同样的，在现在这个阶段，我们也不能因为代码是 AI 生成的，就认为程序员没有在 coding。</p>
+
+		<p><strong>改变的从来都不是机器码或者代码是由谁写出来的，而是人编程的抽象层级。</strong></p>
+
+		<p>AI Agent 带来的变化，正是人类再次提升了编程的抽象层级。我们开始把目标、约束和预期结果交给 Agent，让它把想法展开成代码，再根据运行结果继续调整。</p>
+
+		<p>这件事发生得很快。但如果站在历史的角度上看，软件的发展一直伴随着类似的迁移：一些原本由程序员亲手完成的工作，被新的语言或者工具接手。</p>
+
+		<p>截至 2025 年 8 月 31 日，GitHub 上已有超过 113 万个公开仓库引入生成式 AI 模型 SDK，同比增长 178%。<sup class="sn-ref"><a href="#n3" id="r3">3</a></sup><span class="sidenote" id="n3"><span class="sn-no">3</span><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/">GitHub Octoverse 2025</a>，GitHub Blog。</span></p>
+
+		<figure class="fig">
+			<figcaption><span class="fig-no">图 1</span>　采用生成式 AI 模型 SDK 的公开仓库累计数。数据截至 2025 年 8 月 31 日，来源：GitHub Octoverse 2025。</figcaption>
+			<img src="../assets/image-1.webp" width="1440" height="810" alt="GitHub 上使用生成式 AI 模型 SDK 的公开仓库增长图">
+		</figure>
+
+		<p>要理解今天，不妨先回顾下历史。</p>
+
+		<h2 class="ch" id="s1"><span class="ch-no">第一节</span>接线器</h2>
+
+		<p>把时钟拨回 1940 年代。那时，“写一个新程序”与“重新设置一台机器”之间，还没有今天这样清楚的分界。</p>
+
+		<p>早期 ENIAC 由许多功能单元组成。为了让一次加法的结果进入下一次乘法，程序员需要连接电缆、设置开关，把数学过程变成机器内部的信号路径。Computer History Museum 的记录显示，为一个新问题设计配置、接线和设定开关，可能需要许多天。<sup class="sn-ref"><a href="#n4" id="r4">4</a>,<a href="#n5" id="r5">5</a></sup><span class="sidenote" id="n4"><span class="sn-no">4</span><a href="https://www.computerhistory.org/revolution/birth-of-the-computer/4/78">Computer History Museum：ENIAC</a>。</span><span class="sidenote" id="n5"><span class="sn-no">5</span><a href="https://computerhistory.org/blog/programming-the-eniac-an-example-of-why-computer-history-is-hard/">Programming the ENIAC</a>，Computer History Museum 博客。</span></p>
+
+		<figure class="fig">
+			<figcaption><span class="fig-no">图 2</span>　约 1946 年，Betty Jean Jennings（左）和 Frances Bilas（右）在 ENIAC 面板前工作。U.S. Army Photo / ARL Technical Library，经 <a href="https://commons.wikimedia.org/wiki/File:Two_women_operating_ENIAC_(full_resolution).jpg">Wikimedia Commons</a>；美国联邦政府公务作品，在美国属公有领域。</figcaption>
+			<img src="../assets/image-2.webp" width="1280" height="878" alt="Betty Jean Jennings 与 Frances Bilas 在 ENIAC 面板前工作">
+		</figure>
+
+		<p>这张老照片里的人不是在给一份写好的软件做安装。她们设置的线路和开关，表达程序应该怎样运行。计算交给了机器，人类安排计算的过程，却依然是一项具体而繁复的手工劳动。</p>
+
+		<p>后来，程序开始以编码指令的形式被保存下来。1948 年，经过改造的 ENIAC 执行起存放在功能表开关中的指令；同一年，Manchester Baby 演示了保存在可写存储器中的程序。改变任务，逐渐不再意味着重新布置整台机器。<sup class="sn-ref"><a href="#n6" id="r6">6</a></sup>人开始在一台通用的机器上，描述不同的过程。<span class="sidenote" id="n6"><span class="sn-no">6</span><a href="https://www.computerhistory.org/timeline/computers/">Computer History Museum：计算机时间线</a>。</span></p>
+
+		<p>但直接编写机器指令仍然很费力。程序员要面对操作码、地址和具体的硬件规则。汇编语言让这些数字获得了名字：用助记符表达操作，用符号标记位置，再由汇编器完成翻译。<sup class="sn-ref"><a href="#n7" id="r7">7</a></sup><span class="sidenote" id="n7"><span class="sn-no">7</span><a href="https://www.ibm.com/docs/en/zos-basic-skills?topic=zos-assembler-language">IBM 文档：Assembler language</a>，z/OS 基础知识。</span></p>
+
+		<p>程序员仍然需要理解机器，却不必每次都亲手处理全部数字编码。机器和人的表达之间，多出了一层可以代劳的工具。</p>
+
+		<h2 class="ch" id="s2"><span class="ch-no">第二节</span>Fortran</h2>
+
+		<p>1950 年代，John Backus 带领 IBM 团队开发 Fortran。他们想让科学和工程问题可以用公式、循环和数组来表达，把大量机器指令的生成留给编译器。项目于 1954 年启动，编译器在 1957 年推出。<sup class="sn-ref"><a href="#n8" id="r8">8</a></sup><span class="sidenote" id="n8"><span class="sn-no">8</span><a href="https://www.ibm.com/history/john-backus">IBM History：John Backus</a>。</span></p>
+
+		<p>Fortran 团队的原始论文里，写了一个很小的故事。</p>
+
+		<p>一名程序员接受一天培训后，花四小时写出 47 条 Fortran 语句。IBM 704 随后用六分钟，把它们展开成约 1,000 条机器指令。第一次运行的结果不对，他根据输出改写了一条源语句，重新编译，得到了正确的答案。<sup class="sn-ref"><a href="#n9" id="r9">9</a></sup><span class="sidenote" id="n9"><span class="sn-no">9</span>Backus 等，<a href="https://softwarepreservation.computerhistory.org/FORTRAN/paper/BackusEtAl-FortranAutomaticCodingSystem-1957.pdf">The FORTRAN Automatic Coding System</a>，1957。</span></p>
+
+		<p>他估计，如果手工编码，需要三天，调试时间另算。这不是所有 Fortran 项目的统一效率，但这一次任务已经足够具体：他不必逐条写出那约一千条机器指令，也能让机器完成自己安排的计算。</p>
+
+		<p>而当时，对编译器的怀疑并不少。习惯手写代码的程序员担心，机器自动生成的指令不够高效。Fortran 的编译器必须在实际机器上证明自己，才能让这种更高层的表达方式被接受。<sup class="sn-ref"><a href="#n10" id="r10">10</a></sup><span class="sidenote" id="n10"><span class="sn-no">10</span><a href="https://www.computerhistory.org/timeline/1957/">Computer History Museum：1957 年时间线</a>。</span></p>
+
+		<p>人没有因此停止编程。那名程序员仍然要表达算法，也仍然要发现答案不对。变化在于，他修改的是 47 条语句中的一条，而不是重新安排下面约一千条指令的细节。</p>
+
+		<p>我们今天觉得理所当然的“写源码，然后编译”，曾经也是一项需要解释、需要建立信任的新工作方式。</p>
+
+		<p class="excerpt-end">样稿节选至第二节「Fortran」。后文「C &amp; Unix」「Web &amp; Cloud」「AI - 新的抽象层级」「站在更大的尺度面前」从略。</p>
+	</article>
+</main>
+
+<nav class="next" aria-label="翻页">
+	<div>
+		<span class="label">下一篇</span>
+		<a href="#"><span class="no">02</span><span class="tt">阶段性总结，在大厂<wbr>做了一年半 Agent&nbsp;后</span></a>
+	</div>
+	<p class="source">本文首发于知乎，<a href="https://zhuanlan.zhihu.com/p/2081370754508133635">查看原文</a>。<br>引用与出处见页边注。</p>
+</nav>
+
+</body>
+</html>

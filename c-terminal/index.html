@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>邢政 Daniel Xing · ~</title>
+	<link rel="stylesheet" href="../fonts/gf-ac3a0b472a.css">
+	<link rel="stylesheet" href="term.css" />
+	<style>
+		.session-body {
+			padding: 34px 48px 30px;
+		}
+		.block + .block {
+			margin-top: 40px;
+		}
+
+		/* whoami = the CRT profile, enlarged: scanlines + glass glow live only here */
+		.hero {
+			position: relative;
+			margin: -34px -48px 0;
+			padding: 34px 48px 34px;
+			background: radial-gradient(120% 150% at 26% 0%, var(--glass) 0%, rgb(23 55 33 / 0.35) 45%, transparent 75%);
+			border-bottom: 1px solid rgb(72 113 67 / 0.55);
+		}
+		.hero::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			background: repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.2) 0 1px, transparent 1px 4px);
+		}
+		.hero .cmd {
+			padding-bottom: 14px;
+			margin-bottom: 22px;
+			border-bottom: 1px solid rgb(72 113 67 / 0.55);
+		}
+		.profile {
+			display: grid;
+			grid-template-columns: 11ch 1fr;
+			gap: 10px 0;
+			margin: 0;
+			text-shadow: 0 0 0.35em rgb(169 232 152 / 0.22);
+		}
+		.profile dt {
+			color: var(--label);
+			font-size: 16px;
+			line-height: 30px;
+		}
+		.profile dd {
+			margin: 0;
+			color: var(--value);
+			font-size: 20px;
+			line-height: 30px;
+		}
+		.profile dd small {
+			color: var(--muted);
+			font-size: 15px;
+			text-shadow: none;
+		}
+		.profile .star {
+			color: var(--beam);
+		}
+		.hero h1 {
+			margin: 0;
+		}
+
+		/* ls output rows: one focusable link per line, TUI-style inverted selection */
+		.ls {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.row {
+			display: grid;
+			column-gap: 2ch;
+			align-items: baseline;
+			margin: 0 -12px;
+			padding: 5px 12px;
+			border-radius: 2px;
+		}
+		.row:hover,
+		.row:focus-visible,
+		.row.is-selected {
+			background: var(--phosphor);
+			color: #08110b;
+			outline: none;
+		}
+		.row:hover *,
+		.row:focus-visible *,
+		.row.is-selected * {
+			color: inherit !important;
+		}
+
+		.ls-writing .row {
+			grid-template-columns: 10ch minmax(0, 1fr) 7ch 11ch;
+		}
+		.c-date {
+			color: var(--label);
+		}
+		.c-title {
+			color: var(--text-hi);
+			font-size: 16px;
+			text-wrap: pretty;
+		}
+		.c-read {
+			color: var(--muted);
+			text-align: right;
+		}
+		.c-tag {
+			color: var(--label);
+		}
+
+		.ls-projects .row {
+			grid-template-columns: 5ch 28ch 5ch minmax(0, 1fr) 7ch;
+		}
+		.c-star {
+			color: var(--beam);
+			text-align: right;
+		}
+		.c-name {
+			color: var(--value);
+			font-weight: 500;
+		}
+		.c-lang {
+			color: var(--muted);
+		}
+		.c-desc {
+			color: var(--text);
+			text-wrap: pretty;
+		}
+		.c-status {
+			text-align: right;
+			white-space: nowrap;
+		}
+		.s-active {
+			color: var(--beam);
+			font-weight: 700;
+		}
+		.s-archived {
+			color: var(--muted);
+		}
+		.ls-note {
+			margin: 12px 0 0;
+			color: var(--muted);
+		}
+		.ls-note a {
+			color: var(--phosphor);
+			text-decoration: underline;
+			text-decoration-color: rgb(169 232 152 / 0.45);
+			text-underline-offset: 3px;
+		}
+
+		.contact {
+			display: grid;
+			grid-template-columns: 11ch 1fr;
+			gap: 3px 0;
+			margin: 0;
+		}
+		.contact dt {
+			color: var(--label);
+		}
+		.contact dd {
+			margin: 0;
+		}
+		.contact a {
+			color: var(--text);
+			text-decoration: underline;
+			text-decoration-color: rgb(169 232 152 / 0.4);
+			text-underline-offset: 3px;
+		}
+		.contact a:hover {
+			color: var(--beam);
+			text-decoration-color: currentColor;
+		}
+
+		@media (max-width: 640px) {
+			.session-body {
+				padding: 22px 16px 22px;
+			}
+			.hero {
+				margin: -22px -16px 0;
+				padding: 22px 16px 24px;
+			}
+			.profile {
+				grid-template-columns: 9ch 1fr;
+				gap: 6px 0;
+			}
+			.profile dt {
+				font-size: 13px;
+				line-height: 24px;
+			}
+			.profile dd {
+				font-size: 16px;
+				line-height: 24px;
+			}
+			.block + .block {
+				margin-top: 30px;
+			}
+			.row {
+				margin: 0 -8px;
+				padding: 7px 8px;
+			}
+			/* writing: meta line on top, title below */
+			.ls-writing .row {
+				grid-template-columns: auto auto 1fr;
+				grid-template-areas: "date read tag" "title title title";
+				row-gap: 2px;
+				font-size: 12.5px;
+			}
+			.ls-writing .c-date {
+				grid-area: date;
+			}
+			.ls-writing .c-read {
+				grid-area: read;
+				text-align: left;
+			}
+			.ls-writing .c-tag {
+				grid-area: tag;
+			}
+			.ls-writing .c-title {
+				grid-area: title;
+				font-size: 15.5px;
+				line-height: 1.55;
+			}
+			/* projects: drop language, description wraps under the name */
+			.ls-projects .row {
+				grid-template-columns: minmax(0, 1fr) auto auto;
+				grid-template-areas: "name star status" "desc desc desc";
+				column-gap: 1.5ch;
+				row-gap: 1px;
+			}
+			.ls-projects .c-lang {
+				display: none;
+			}
+			.ls-projects .c-star {
+				grid-area: star;
+				font-size: 12.5px;
+			}
+			.ls-projects .c-name {
+				grid-area: name;
+				overflow-wrap: anywhere;
+			}
+			.ls-projects .c-status {
+				grid-area: status;
+				font-size: 12.5px;
+			}
+			.ls-projects .c-desc {
+				grid-area: desc;
+				font-size: 13.5px;
+				line-height: 1.6;
+				color: #c4d3c8;
+			}
+			.contact {
+				grid-template-columns: 8ch 1fr;
+				font-size: 13.5px;
+			}
+			.contact dd {
+				overflow-wrap: anywhere;
+			}
+			.keys {
+				display: none;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="crt">
+		<div class="screen">
+			<nav class="tmux" aria-label="主导航">
+				<span class="session">[xz1220]</span>
+				<a class="win" href="index.html" aria-current="page">0:~*</a>
+				<a class="win" href="#writing">1:文章</a>
+				<a class="win" href="#projects">2:项目</a>
+				<a class="win" href="#contact">3:关于</a>
+				<span class="right">
+					<span class="lang"><b>中</b> / <a href="#">EN</a></span>
+					<span class="search"><kbd style="color: inherit">/</kbd> 搜索</span>
+				</span>
+			</nav>
+
+			<main class="session-body">
+				<section class="block hero" aria-labelledby="who">
+					<h1 class="sr-only" id="who">邢政 Daniel Xing</h1>
+					<p class="cmd">
+						<span class="ps1">xz1220@linux:<span class="path">~</span>$</span> whoami
+					</p>
+					<dl class="profile">
+						<dt>Name</dt>
+						<dd>邢政 Daniel Xing <small>（知乎 KK）</small></dd>
+						<dt>Work</dt>
+						<dd>AI Engineer · ex-ByteDance → 2026.06 起创业</dd>
+						<dt>Building</dt>
+						<dd>open-dynamic-workflows <span class="star">★111</span></dd>
+						<dt>Langs</dt>
+						<dd>Go · Python · TypeScript</dd>
+						<dt>Based</dt>
+						<dd>深圳</dd>
+					</dl>
+				</section>
+
+				<section class="block" id="writing" aria-labelledby="writing-cmd">
+					<h2 class="cmd" id="writing-cmd">
+						<span class="ps1" aria-hidden="true">xz1220@linux:<span class="path">~</span>$</span> ls -t ~/writing<span
+							class="sr-only"
+						>（文章）</span>
+					</h2>
+					<ul class="ls ls-writing" role="list">
+						<li>
+							<a class="row is-selected" href="#">
+								<span class="c-date">2026-09-17</span><span class="c-title">关于创业碎碎念</span
+								><span class="c-read">14 min</span><span class="c-tag">#startup</span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="#">
+								<span class="c-date">2026-09-16</span><span class="c-title">聊聊工作的“厚黑学”</span
+								><span class="c-read">3 min</span><span class="c-tag">#career</span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="#">
+								<span class="c-date">2026-09-15</span
+								><span class="c-title">阶段性总结，在大厂做了一年半 Agent 后</span
+								><span class="c-read">18 min</span><span class="c-tag">#ai-agents</span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="#">
+								<span class="c-date">2026-09-11</span
+								><span class="c-title">GPT-6 + Open Design 前端设计，我给到夯</span
+								><span class="c-read">3 min</span><span class="c-tag">#ai-agents</span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="article.html">
+								<span class="c-date">2026-09-02</span
+								><span class="c-title">人类只是再次提升了编程的抽象层级</span
+								><span class="c-read">22 min</span><span class="c-tag">#ai-agents</span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="#" lang="en">
+								<span class="c-date">2026-06-01</span><span class="c-title">What this blog is for</span
+								><span class="c-read">1 min</span><span class="c-tag">#meta</span>
+							</a>
+						</li>
+					</ul>
+				</section>
+
+				<section class="block" id="projects" aria-labelledby="projects-cmd">
+					<h2 class="cmd" id="projects-cmd">
+						<span class="ps1" aria-hidden="true">xz1220@linux:<span class="path">~</span>$</span> ls -t ~/projects<span
+							class="sr-only"
+						>（项目）</span>
+					</h2>
+					<ul class="ls ls-projects" role="list">
+						<li>
+							<a class="row" href="https://github.com/xz1220/open-dynamic-workflows">
+								<span class="c-star">★111</span><span class="c-name">open-dynamic-workflows</span
+								><span class="c-lang">TS</span
+								><span class="c-desc">跨 Codex、Claude Code、Gemini、Qwen、Kimi 的动态工作流运行时</span
+								><span class="c-status s-active">[进行中]</span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="https://github.com/xz1220/repotempo">
+								<span class="c-star"></span><span class="c-name">repotempo</span><span class="c-lang">Go</span
+								><span class="c-desc">GitHub 趋势追踪：Trending + 每日 Star 历史 + 自托管看板</span
+								><span class="c-status"></span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="https://github.com/xz1220/AVM">
+								<span class="c-star">★3</span><span class="c-name">AVM</span><span class="c-lang">Go</span
+								><span class="c-desc">定义一次 coding agent，跑在任何运行时</span
+								><span class="c-status s-archived">[已归档]</span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="https://github.com/xz1220/agent-interview-prep">
+								<span class="c-star">★1</span><span class="c-name">agent-interview-prep</span
+								><span class="c-lang">Shell</span
+								><span class="c-desc">Agent 面试题库 + 优质 Agent 源码资料 + 题→料映射</span
+								><span class="c-status"></span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="https://github.com/xz1220/Kempt">
+								<span class="c-star">★2</span><span class="c-name">Kempt</span><span class="c-lang">TS</span
+								><span class="c-desc">Claude Code / Codex 的 agent 债务扫描与可逆清理</span
+								><span class="c-status"></span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="https://github.com/xz1220/harness-book">
+								<span class="c-star">★1</span><span class="c-name">harness-book</span><span class="c-lang">Py</span
+								><span class="c-desc">从零手写 ReAct loop 讲 agent harness 的开源书</span
+								><span class="c-status"></span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="https://github.com/xz1220/awesome-dynamic-workflows">
+								<span class="c-star">★1</span><span class="c-name">awesome-dynamic-workflows</span
+								><span class="c-lang">—</span
+								><span class="c-desc">兼容 ODW 运行时的动态工作流精选合集</span><span class="c-status"></span>
+							</a>
+						</li>
+						<li>
+							<a class="row" href="https://github.com/xz1220/DIG-Data-Annotation-Platform">
+								<span class="c-star">★4</span><span class="c-name">DIG-Data-Annotation-Platform</span
+								><span class="c-lang">Go</span
+								><span class="c-desc">CV 数据标注平台，附容器监控（2020）</span><span class="c-status"></span>
+							</a>
+						</li>
+					</ul>
+					<p class="ls-note">
+						8 / 26 个公开仓库 · 其余见 <a href="https://github.com/xz1220?tab=repositories">github.com/xz1220</a>
+					</p>
+				</section>
+
+				<section class="block" id="contact" aria-labelledby="contact-cmd">
+					<h2 class="cmd" id="contact-cmd">
+						<span class="ps1" aria-hidden="true">xz1220@linux:<span class="path">~</span>$</span> cat ~/contact<span
+							class="sr-only"
+						>（联系方式）</span>
+					</h2>
+					<dl class="contact">
+						<dt>github</dt>
+						<dd><a href="https://github.com/xz1220">github.com/xz1220</a></dd>
+						<dt>x</dt>
+						<dd><a href="https://x.com/DanielsCabin">@DanielsCabin</a></dd>
+						<dt>知乎</dt>
+						<dd><a href="https://www.zhihu.com/people/xz1220">KK · zhihu.com/people/xz1220</a></dd>
+						<dt>小红书</dt>
+						<dd>
+							<a href="https://www.xiaohongshu.com/user/profile/655488ff00000000080023a0">xiaohongshu.com/user/profile/655488ff…</a>
+						</dd>
+						<dt>email</dt>
+						<dd><a href="mailto:danielxing1@163.com">danielxing1@163.com</a></dd>
+						<dt>wechat</dt>
+						<dd>Xingzheng-daniel</dd>
+						<dt>rss</dt>
+						<dd><a href="#">/rss.xml</a></dd>
+					</dl>
+				</section>
+
+				<p class="block cmd" aria-hidden="true">
+					<span class="ps1">xz1220@linux:<span class="path">~</span>$</span> <span class="cursor"></span>
+				</p>
+			</main>
+
+			<footer class="keys" aria-label="键盘操作">
+				<span><kbd>j</kbd>/<kbd>k</kbd> 移动</span>
+				<span><kbd>enter</kbd> 打开</span>
+				<span><kbd>/</kbd> 搜索</span>
+				<span><kbd>t</kbd> 主题</span>
+				<span><kbd>g a</kbd> 关于</span>
+				<span><kbd>1</kbd>–<kbd>3</kbd> 切换窗口</span>
+			</footer>
+		</div>
+	</div>
+	<p class="colophon">
+		© 2026 邢政 Daniel Xing · 源码 <a href="https://github.com/xz1220/xz1220.github.io">xz1220/xz1220.github.io</a>
+	</p>
+
+	<script>
+		// j/k moves the TUI selection across every ls row; enter follows the focused link natively.
+		const rows = [...document.querySelectorAll(".row")];
+		let cur = rows.findIndex((r) => r.classList.contains("is-selected"));
+		const select = (n) => {
+			rows[cur]?.classList.remove("is-selected");
+			cur = (n + rows.length) % rows.length;
+			rows[cur].classList.add("is-selected");
+			rows[cur].focus();
+		};
+		rows.forEach((r, i) =>
+			r.addEventListener("focus", () => {
+				rows[cur]?.classList.remove("is-selected");
+				cur = i;
+				r.classList.add("is-selected");
+			}),
+		);
+		document.addEventListener("keydown", (e) => {
+			if (e.metaKey || e.ctrlKey || e.altKey) return;
+			if (e.key === "j") select(cur + 1);
+			if (e.key === "k") select(cur - 1);
+		});
+	</script>
+</body>
+</html>

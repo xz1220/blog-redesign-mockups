@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>人类只是再次提升了编程的抽象层级 · 邢政 Daniel Xing</title>
+	<link rel="stylesheet" href="../fonts/gf-ac3a0b472a.css">
+	<link rel="stylesheet" href="term.css" />
+	<style>
+		.pager {
+			padding: 28px 48px 0;
+		}
+		.pager .cmd {
+			margin: 0;
+			padding-bottom: 14px;
+			border-bottom: 1px solid rgb(72 113 67 / 0.55);
+		}
+
+		/* reader mode: same frame, proportional type */
+		.reader {
+			display: grid;
+			grid-template-columns: minmax(0, 680px) 220px;
+			justify-content: space-between;
+			gap: 56px;
+			padding: 44px 48px 72px;
+		}
+		article {
+			font: 400 17px/1.85 var(--font-read);
+			color: var(--text);
+		}
+		.post-title {
+			margin: 0 0 16px;
+			font: 700 40px/1.3 var(--font-read);
+			color: var(--text-hi);
+			letter-spacing: 0.01em;
+			word-break: keep-all;
+			text-wrap: balance;
+		}
+		.meta {
+			margin: 0 0 22px;
+			font: 13px/1.7 var(--font-mono);
+			color: var(--muted);
+		}
+		.meta span {
+			white-space: nowrap;
+		}
+		.meta .tag {
+			color: var(--label);
+		}
+		.deck {
+			margin: 0 0 30px;
+			font-size: 19px;
+			line-height: 1.75;
+			color: #bccbbf;
+		}
+		figure {
+			margin: 34px 0;
+		}
+		figure img {
+			display: block;
+			width: 100%;
+			height: auto;
+			border: 1px solid var(--bezel);
+			border-radius: 4px;
+			background: #050806;
+		}
+		figcaption {
+			margin-top: 10px;
+			font: 12.5px/1.75 var(--font-mono);
+			color: var(--muted);
+			font-style: normal;
+		}
+		figcaption .fig {
+			color: var(--phosphor);
+		}
+		figcaption a {
+			color: inherit;
+			text-decoration: underline;
+			text-decoration-color: rgb(138 163 146 / 0.5);
+			text-underline-offset: 3px;
+		}
+		.cover {
+			margin-top: 0;
+		}
+
+		article p {
+			margin: 0 0 1.15em;
+		}
+		article strong {
+			color: #f4faf5;
+			font-weight: 700;
+		}
+		article p a {
+			color: var(--phosphor);
+			text-decoration: underline;
+			text-decoration-color: rgb(169 232 152 / 0.45);
+			text-decoration-thickness: 1px;
+			text-underline-offset: 4px;
+		}
+		article p a:hover {
+			text-decoration-color: currentColor;
+		}
+		.ref a {
+			font: 500 12.5px/1 var(--font-mono);
+			text-decoration: none !important;
+		}
+		.ref {
+			vertical-align: 0.4em;
+			line-height: 0;
+			margin: 0 0.1em;
+		}
+		blockquote {
+			margin: 26px 0;
+			padding: 4px 0 4px 20px;
+			border-left: 2px solid var(--label);
+			font: 500 16.5px/1.7 var(--font-mono);
+			color: var(--value);
+			text-shadow: 0 0 0.35em rgb(169 232 152 / 0.18);
+		}
+		blockquote p {
+			margin: 0;
+		}
+		article h2 {
+			margin: 2.2em 0 0.8em;
+			font: 700 26px/1.4 var(--font-read);
+			color: var(--text-hi);
+		}
+		article h2 .hash {
+			margin-right: 0.45em;
+			font: 500 0.8em var(--font-mono);
+			color: var(--label);
+		}
+		.excerpt-end {
+			margin: 44px 0 0;
+			padding-top: 18px;
+			border-top: 1px dashed rgb(72 113 67 / 0.7);
+			font: 13px/1.8 var(--font-mono);
+			color: var(--muted);
+		}
+		.post-foot {
+			display: grid;
+			gap: 6px;
+			margin-top: 26px;
+			font: 13.5px/1.7 var(--font-mono);
+			color: var(--muted);
+		}
+		.post-foot a {
+			color: var(--text);
+			text-decoration: underline;
+			text-decoration-color: rgb(169 232 152 / 0.4);
+			text-underline-offset: 3px;
+		}
+
+		/* :toc pane — uses the right-hand space the current site leaves empty */
+		.toc {
+			position: sticky;
+			top: 24px;
+			align-self: start;
+			font: 13px/1.6 var(--font-mono);
+		}
+		.toc-head {
+			margin: 0 0 10px;
+			color: var(--muted);
+			font-weight: 400;
+			font-size: 13px;
+		}
+		.toc ol {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			border-left: 1px solid rgb(72 113 67 / 0.55);
+		}
+		.toc a {
+			display: block;
+			padding: 4px 10px;
+			color: var(--muted);
+		}
+		.toc a:hover {
+			color: var(--text);
+		}
+		.toc a[aria-current] {
+			margin-left: -1px;
+			border-left: 2px solid var(--phosphor);
+			color: var(--phosphor);
+		}
+		.toc a[aria-current]::before {
+			content: "▸ ";
+		}
+
+		/* less(1)-style status line, sticky to the bottom of the viewport */
+		.less {
+			position: sticky;
+			bottom: 0;
+			z-index: 2;
+			display: flex;
+			gap: 0 18px;
+			flex-wrap: wrap;
+			padding: 7px 22px;
+			background: var(--phosphor);
+			color: #08110b;
+			font: 500 13px/1.5 var(--font-mono);
+		}
+		.less .file {
+			font-weight: 700;
+		}
+		.less .sep {
+			opacity: 0.55;
+		}
+
+		@media (max-width: 1080px) {
+			.reader {
+				grid-template-columns: minmax(0, 680px);
+				justify-content: center;
+			}
+			.toc {
+				display: none;
+			}
+		}
+		@media (max-width: 640px) {
+			.pager {
+				padding: 18px 16px 0;
+			}
+			.pager .cmd {
+				font-size: 12.5px;
+			}
+			.reader {
+				padding: 26px 16px 48px;
+			}
+			article {
+				font-size: 16.5px;
+				line-height: 1.85;
+			}
+			.post-title {
+				font-size: 29px;
+				line-height: 1.35;
+			}
+			.meta {
+				font-size: 12px;
+			}
+			.deck {
+				font-size: 17px;
+			}
+			blockquote {
+				font-size: 15px;
+				padding-left: 14px;
+			}
+			article h2 {
+				font-size: 22px;
+			}
+			.less {
+				flex-wrap: nowrap;
+				gap: 0 8px;
+				padding: 7px 14px;
+				font-size: 12px;
+				white-space: nowrap;
+			}
+			.less > * {
+				flex: none;
+			}
+			.less .file {
+				flex: 0 1 auto;
+				min-width: 0;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="crt">
+		<div class="screen">
+			<nav class="tmux" aria-label="主导航">
+				<span class="session">[xz1220]</span>
+				<a class="win" href="index.html">0:~</a>
+				<a class="win" href="index.html#writing" aria-current="page">1:文章*</a>
+				<a class="win" href="index.html#projects">2:项目</a>
+				<a class="win" href="index.html#contact">3:关于</a>
+				<span class="right">
+					<span class="lang"><b>中</b> / <a href="#">EN</a></span>
+					<span class="search"><kbd style="color: inherit">/</kbd> 搜索</span>
+				</span>
+			</nav>
+
+			<div class="pager">
+				<p class="cmd">
+					<span class="ps1">xz1220@linux:<span class="path">~</span>$</span>
+					less ~/writing/ai-agent-programming-abstraction.md
+				</p>
+			</div>
+
+			<div class="reader">
+				<article lang="zh-CN">
+					<header>
+						<h1 class="post-title">人类只是再次提升了<wbr />编程的抽象层级</h1>
+						<p class="meta">
+							<span>2026-09-02</span> · <span>22 min</span> · <span>updated 2026-09-24</span> · <span>zh-CN</span> ·
+							<span class="tag">#ai-agents</span> <span class="tag">#software-engineering</span>
+						</p>
+						<p class="deck">从接线器到 Agent，人的意图正在更高层被表达。</p>
+						<figure class="cover">
+							<img
+								src="../assets/the-architects-dream.jpg"
+								alt="托马斯·科尔《建筑师之梦》：沉睡的建筑师躺在巨型柱头上，眼前层叠展开从埃及金字塔、希腊罗马神殿到哥特教堂的建筑文明。"
+								width="1600"
+								height="1000"
+							/>
+							<figcaption>
+								<span class="fig">cover —</span>
+								<a
+									href="https://commons.wikimedia.org/wiki/File:Thomas_Cole_-_Architect%E2%80%99s_Dream_-_Google_Art_Project.jpg"
+									>Thomas Cole, The Architect’s Dream, 1840 · Toledo Museum of Art · Public domain</a
+								>
+							</figcaption>
+						</figure>
+					</header>
+
+					<section id="intro" aria-label="引言">
+						<p>
+							2026 年 5 月，Linux 和 Git 的创造者 Linus Torvalds 在一场对谈中，提到有人宣称自己 99% 的代码由 AI
+							编写。他随即拿编译器打了个比方：
+						</p>
+						<blockquote lang="en"><p>“100% of their code is written by compilers. But they never say that.”</p></blockquote>
+						<p>
+							程序早就经过工具生成，只是过去人们不这样谈论它。他随后说，AI 正在改变编程的方式，却没有改变编程的基本问题。<a
+								href="https://www.youtube.com/watch?v=fi29pfLcW4I&amp;t=1569s"
+								>访谈，26:09</a
+							>、<a href="https://www.youtube.com/watch?v=fi29pfLcW4I&amp;t=1649s">27:29</a>
+						</p>
+						<p>
+							一个月后，Claude Code 核心建设者 Boris Cherny 在另一场访谈里，讲起自己的家庭：祖父使用穿孔卡，父亲写汇编，到了他这一代，使用
+							Java、JavaScript 和 Python。他说，编程的抽象层级总是在上升。<a
+								href="https://www.youtube.com/watch?v=RkQQ7WEor7w&amp;t=613s"
+								>Boris 访谈</a
+							>
+						</p>
+						<p>
+							而他自己的工作，也从在编辑器里写代码，变成同时运行多个 Claude，再变成编写自动运行的循环，让这些循环提示
+							Claude、判断下一步。他用一句话描述现在的工作：
+						</p>
+						<blockquote lang="en"><p>“My job is to write loops.”</p></blockquote>
+						<p>
+							其实程序员的工作不仅仅是编码。我们不会因为机器码是编译器生成的，就认为程序员没有在
+							coding；同样的，在现在这个阶段，我们也不能因为代码是 AI 生成的，就认为程序员没有在 coding。
+						</p>
+						<p><strong>改变的从来都不是机器码或者代码是由谁写出来的，而是人编程的抽象层级。</strong></p>
+						<p>
+							AI Agent 带来的变化，正是人类再次提升了编程的抽象层级。我们开始把目标、约束和预期结果交给
+							Agent，让它把想法展开成代码，再根据运行结果继续调整。
+						</p>
+						<p>
+							这件事发生得很快。但如果站在历史的角度上看，软件的发展一直伴随着类似的迁移：一些原本由程序员亲手完成的工作，被新的语言或者工具接手。
+						</p>
+						<p>
+							截至 2025 年 8 月 31 日，GitHub 上已有超过 113 万个公开仓库引入生成式 AI 模型 SDK，同比增长 178%。<sup class="ref"
+								><a
+									href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/"
+									>[1]</a
+								></sup
+							>
+						</p>
+						<figure>
+							<img
+								src="../assets/image-1.webp"
+								alt="GitHub 上使用生成式 AI 模型 SDK 的公开仓库增长图"
+								width="1440"
+								height="810"
+								loading="lazy"
+							/>
+							<figcaption>
+								<span class="fig">fig.1 —</span> 采用生成式 AI 模型 SDK 的公开仓库累计数。数据截至 2025 年 8 月 31 日，来源：GitHub
+								Octoverse 2025。
+							</figcaption>
+						</figure>
+						<p>要理解今天，不妨先回顾下历史。</p>
+					</section>
+
+					<section id="s-wiring" aria-labelledby="h-wiring">
+						<h2 id="h-wiring"><span class="hash" aria-hidden="true">##</span>接线器</h2>
+						<p>把时钟拨回 1940 年代。那时，“写一个新程序”与“重新设置一台机器”之间，还没有今天这样清楚的分界。</p>
+						<p>
+							早期 ENIAC 由许多功能单元组成。为了让一次加法的结果进入下一次乘法，程序员需要连接电缆、设置开关，把数学过程变成机器内部的信号路径。Computer
+							History Museum 的记录显示，为一个新问题设计配置、接线和设定开关，可能需要许多天。<a
+								href="https://www.computerhistory.org/revolution/birth-of-the-computer/4/78"
+								>Computer History Museum：ENIAC</a
+							>、<a href="https://computerhistory.org/blog/programming-the-eniac-an-example-of-why-computer-history-is-hard/"
+								>Programming the ENIAC</a
+							>
+						</p>
+						<figure id="fig-eniac">
+							<img
+								src="../assets/image-2.webp"
+								alt="Betty Jean Jennings 与 Frances Bilas 在 ENIAC 面板前工作"
+								loading="lazy"
+							/>
+							<figcaption>
+								<span class="fig">fig.2 —</span> 约 1946 年，Betty Jean Jennings（左）和 Frances Bilas（右）在 ENIAC
+								面板前工作。U.S. Army Photo / ARL Technical Library，经
+								<a href="https://commons.wikimedia.org/wiki/File:Two_women_operating_ENIAC_(full_resolution).jpg"
+									>Wikimedia Commons</a
+								>；美国联邦政府公务作品，在美国属公有领域。
+							</figcaption>
+						</figure>
+						<p>
+							这张老照片里的人不是在给一份写好的软件做安装。她们设置的线路和开关，表达程序应该怎样运行。计算交给了机器，人类安排计算的过程，却依然是一项具体而繁复的手工劳动。
+						</p>
+						<p>
+							后来，程序开始以编码指令的形式被保存下来。1948 年，经过改造的 ENIAC 执行起存放在功能表开关中的指令；同一年，Manchester
+							Baby 演示了保存在可写存储器中的程序。改变任务，逐渐不再意味着重新布置整台机器。<sup class="ref"
+								><a href="https://www.computerhistory.org/timeline/computers/">[2]</a></sup
+							>
+							人开始在一台通用的机器上，描述不同的过程。
+						</p>
+						<p>
+							但直接编写机器指令仍然很费力。程序员要面对操作码、地址和具体的硬件规则。汇编语言让这些数字获得了名字：用助记符表达操作，用符号标记位置，再由汇编器完成翻译。<sup
+								class="ref"
+								><a href="https://www.ibm.com/docs/en/zos-basic-skills?topic=zos-assembler-language">[3]</a></sup
+							>
+						</p>
+						<p>程序员仍然需要理解机器，却不必每次都亲手处理全部数字编码。机器和人的表达之间，多出了一层可以代劳的工具。</p>
+					</section>
+
+					<section id="s-fortran" aria-labelledby="h-fortran">
+						<h2 id="h-fortran"><span class="hash" aria-hidden="true">##</span>Fortran</h2>
+						<p>
+							1950 年代，John Backus 带领 IBM 团队开发 Fortran。他们想让科学和工程问题可以用公式、循环和数组来表达，把大量机器指令的生成留给编译器。项目于
+							1954 年启动，编译器在 1957 年推出。<sup class="ref"
+								><a href="https://www.ibm.com/history/john-backus">[4]</a></sup
+							>
+						</p>
+						<p>Fortran 团队的原始论文里，写了一个很小的故事。</p>
+						<p>
+							一名程序员接受一天培训后，花四小时写出 47 条 Fortran 语句。IBM 704 随后用六分钟，把它们展开成约 1,000
+							条机器指令。第一次运行的结果不对，他根据输出改写了一条源语句，重新编译，得到了正确的答案。<sup class="ref"
+								><a
+									href="https://softwarepreservation.computerhistory.org/FORTRAN/paper/BackusEtAl-FortranAutomaticCodingSystem-1957.pdf"
+									>[5]</a
+								></sup
+							>
+						</p>
+						<p>
+							他估计，如果手工编码，需要三天，调试时间另算。这不是所有 Fortran
+							项目的统一效率，但这一次任务已经足够具体：他不必逐条写出那约一千条机器指令，也能让机器完成自己安排的计算。
+						</p>
+						<p>
+							而当时，对编译器的怀疑并不少。习惯手写代码的程序员担心，机器自动生成的指令不够高效。Fortran
+							的编译器必须在实际机器上证明自己，才能让这种更高层的表达方式被接受。<sup class="ref"
+								><a href="https://www.computerhistory.org/timeline/1957/">[6]</a></sup
+							>
+						</p>
+						<p>
+							人没有因此停止编程。那名程序员仍然要表达算法，也仍然要发现答案不对。变化在于，他修改的是 47
+							条语句中的一条，而不是重新安排下面约一千条指令的细节。
+						</p>
+						<p>我们今天觉得理所当然的“写源码，然后编译”，曾经也是一项需要解释、需要建立信任的新工作方式。</p>
+					</section>
+
+					<p class="excerpt-end">
+						-- 样稿节选到这里。全文后续：C &amp; Unix · Web &amp; Cloud · AI - 新的抽象层级 · 站在更大的尺度面前 --
+					</p>
+					<footer class="post-foot">
+						<span>原文发表于知乎 → <a href="https://zhuanlan.zhihu.com/p/2081370754508133635">zhuanlan.zhihu.com/p/2081370754508133635</a></span>
+						<span><kbd>[</kbd> 上一篇 <a href="#">What this blog is for</a></span>
+						<span><kbd>]</kbd> 下一篇 <a href="#">GPT-6 + Open Design 前端设计，我给到夯</a></span>
+					</footer>
+				</article>
+
+				<nav class="toc" aria-label="本文目录">
+					<p class="toc-head">:toc</p>
+					<ol>
+						<li><a href="#intro" aria-current="true">引言</a></li>
+						<li><a href="#s-wiring">接线器</a></li>
+						<li><a href="#s-fortran">Fortran</a></li>
+						<li><a href="#">C &amp; Unix</a></li>
+						<li><a href="#">Web &amp; Cloud</a></li>
+						<li><a href="#">AI - 新的抽象层级</a></li>
+						<li><a href="#">站在更大的尺度面前</a></li>
+					</ol>
+				</nav>
+			</div>
+
+			<div class="less" role="status" aria-label="阅读位置">
+				<span class="file">ai-agent-programming-abstraction.md</span>
+				<span class="sep">·</span>
+				<span class="pct">12%</span>
+				<span class="sep">·</span>
+				<span><kbd style="color: inherit">q</kbd> 返回</span>
+				<span class="sep">·</span>
+				<span><kbd style="color: inherit">]</kbd> 下一篇</span>
+			</div>
+		</div>
+	</div>
+	<p class="colophon">
+		© 2026 邢政 Daniel Xing · 源码 <a href="https://github.com/xz1220/xz1220.github.io">xz1220/xz1220.github.io</a>
+	</p>
+
+	<script>
+		// less(1) reports how far the bottom of the screen has reached; mirror that.
+		const pct = document.querySelector(".less .pct");
+		const update = () => {
+			const h = document.documentElement.scrollHeight;
+			pct.textContent = Math.min(100, Math.round(((scrollY + innerHeight) / h) * 100)) + "%";
+		};
+		addEventListener("scroll", update, { passive: true });
+		update();
+
+		// :toc scrollspy
+		const links = [...document.querySelectorAll(".toc a")];
+		const sections = links
+			.filter((a) => a.getAttribute("href").length > 1)
+			.map((a) => document.querySelector(a.getAttribute("href")));
+		const spy = () => {
+			let active = sections[0];
+			for (const s of sections) if (s.getBoundingClientRect().top < innerHeight * 0.35) active = s;
+			links.forEach((a) => a.toggleAttribute("aria-current", a.getAttribute("href") === "#" + active.id));
+		};
+		addEventListener("scroll", spy, { passive: true });
+		spy();
+
+		addEventListener("keydown", (e) => {
+			if (e.metaKey || e.ctrlKey || e.altKey) return;
+			if (e.key === "j") scrollBy({ top: 120 });
+			if (e.key === "k") scrollBy({ top: -120 });
+			if (e.key === "q") location.href = "index.html#writing";
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+<meta name="robots" content="noindex, nofollow">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>邢政 Daniel Xing · Agent 运行时与一手笔记</title>
+		<meta name="description" content="邢政（Daniel Xing）做 AI Agent 和让 Agent 跑得稳的基础设施，记录在大厂与创业里做 Agent 的一手经验。" />
+		<link rel="stylesheet" href="../fonts/gf-7d6fbafe97.css">
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<header class="nav">
+			<div class="wrap nav-inner">
+				<a class="brand" href="index.html" aria-label="邢政 Daniel Xing，首页">
+					<svg class="mark" viewBox="0 0 22 16" aria-hidden="true">
+						<rect x="0" y="1" width="11" height="3.2" rx="1.6" fill="#131311" />
+						<rect x="5" y="6.4" width="13" height="3.2" rx="1.6" fill="#00b26a" />
+						<rect x="10" y="11.8" width="9" height="3.2" rx="1.6" fill="#8c887c" />
+					</svg>
+					<span class="wm-zh">邢政</span>
+					<span class="wm-en">Daniel Xing</span>
+				</a>
+				<div class="nav-actions">
+					<nav class="nav-links" aria-label="主导航">
+						<a href="#writing"><span class="ix">01</span>文章</a>
+						<a href="#projects"><span class="ix">02</span>项目</a>
+						<a href="#"><span class="ix">03</span>关于</a>
+					</nav>
+					<div class="lang-toggle" role="group" aria-label="语言">
+						<button type="button" aria-pressed="true">中</button>
+						<button type="button" aria-pressed="false">EN</button>
+					</div>
+					<button class="icon-btn" type="button" aria-label="搜索">
+						<svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="5" /><path d="M11 11l3.5 3.5" /></svg>
+					</button>
+					<button class="icon-btn menu-btn" type="button" aria-label="菜单">
+						<svg viewBox="0 0 16 16"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" /></svg>
+					</button>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<section class="hero wrap">
+				<p class="eyebrow"><span class="dot"></span>Agent runtime · 一手笔记</p>
+				<h1 class="display">做 Agent，<br />也做让 Agent <em>跑得稳</em>的基础设施。</h1>
+				<p class="lede">
+					前字节跳动 AI Agent 工程师，2026 年 6 月离职创业。现在主要在做
+					<a href="https://github.com/xz1220/open-dynamic-workflows">Open Dynamic Workflows</a>：让动态工作流跨 Codex、Claude Code、Gemini 等
+					Coding Agent CLI 运行的开源运行时。知乎上叫 KK，base 深圳。
+				</p>
+				<div class="chips">
+					<a class="chip live" href="https://github.com/xz1220/open-dynamic-workflows"
+						><span class="d"></span>正在做 <b>open-dynamic-workflows</b> ★111</a
+					>
+					<span class="chip">Go · Python · TypeScript</span>
+					<span class="chip">base 深圳</span>
+				</div>
+			</section>
+
+			<!-- Career trace: the signature element. A span waterfall in the ODW run-panel language. -->
+			<section class="trace-sec wrap" aria-labelledby="trace-title">
+				<div class="trace marked">
+					<div class="tr-top">
+						<div class="tr-id">
+							<div class="k">RUN · 职业轨迹</div>
+							<div class="name">
+								<h2 id="trace-title">daniel-xing</h2>
+								<span class="chip live sm"><span class="d"></span>running</span>
+							</div>
+							<div class="range">2024-12 → now · 按开始时间排列</div>
+						</div>
+						<dl class="tr-stats">
+							<div><dt>SPANS</dt><dd>5</dd></div>
+							<div><dt>RUNNING</dt><dd class="sig">2</dd></div>
+							<div><dt>DONE</dt><dd>2</dd></div>
+							<div><dt>ARCHIVED</dt><dd>1</dd></div>
+							<div><dt>POSTS</dt><dd>6</dd></div>
+						</dl>
+					</div>
+
+					<div class="tr-body">
+						<div class="tr-row axis" aria-hidden="true">
+							<div class="tr-lab"></div>
+							<div class="track">
+								<span class="tk first" style="--x: 2%">2025-01</span>
+								<span class="tk m-hide" style="--x: 14%">2025-07</span>
+								<span class="tk m-hide" style="--x: 26%">2026-01</span>
+								<span class="tk m-hide" style="--x: 37%">2026-04</span>
+								<span class="tk" style="--x: 58%">2026-07</span>
+								<span class="tk now" style="--x: 83.9%">now · 10-22</span>
+							</div>
+						</div>
+
+						<div class="tr-row">
+							<div class="tr-lab">
+								<span class="nm">大厂 · 视频创作 Agent</span>
+								<span class="sub">多专家 workflow → ReAct</span>
+							</div>
+							<div class="track">
+								<span class="span done" style="--s: 0%; --e: 57.77%"
+									><span class="tx"><span class="m-hide">2024-12 → 2026-06 · </span>18 个月</span
+									><span class="ok" aria-label="已完成">✓</span></span
+								>
+							</div>
+						</div>
+
+						<div class="tr-row">
+							<div class="tr-lab">
+								<span class="nm"><a href="https://github.com/xz1220/AVM">AVM</a></span>
+								<span class="sub">Agent 配置管理 · 已归档</span>
+							</div>
+							<div class="track">
+								<span class="span arch short" style="--s: 42.37%; --e: 59.87%"><span class="tx m-hide">2026-04 → 07</span></span>
+							</div>
+						</div>
+
+						<div class="tr-row">
+							<div class="tr-lab">
+								<span class="nm"><a href="https://github.com/xz1220/open-dynamic-workflows">open-dynamic-workflows</a></span>
+								<span class="sub">动态工作流运行时 · ★111</span>
+							</div>
+							<div class="track">
+								<span class="span run short" style="--s: 48.9%; --e: 83.9%"
+									><span class="tx">2026-05 → now<span class="m-hide"> · ★111</span></span></span
+								>
+								<span class="cont"></span>
+							</div>
+						</div>
+
+						<div class="tr-row">
+							<div class="tr-lab">
+								<span class="nm"><a href="https://github.com/xz1220/Kempt">Kempt</a></span>
+								<span class="sub">Agent 债务扫描 · 已发布</span>
+							</div>
+							<div class="track">
+								<span class="span done short" style="--s: 48.9%; --e: 57.77%"
+									><span class="ok" aria-label="已发布">✓</span><span class="out-r m-hide">2026-05 → 06 · ★2</span></span
+								>
+							</div>
+						</div>
+
+						<div class="tr-row">
+							<div class="tr-lab">
+								<span class="nm">创业</span>
+								<span class="sub">3 人团队 · 从找需求开始</span>
+							</div>
+							<div class="track">
+								<span class="span run short" style="--s: 57.77%; --e: 83.9%"
+									><span class="tx"><span class="m-hide">2026-</span>06 → now</span></span
+								>
+								<span class="cont"></span>
+							</div>
+						</div>
+
+						<div class="tr-row">
+							<div class="tr-lab">
+								<span class="nm">writing · 文章</span>
+								<span class="sub">6 篇 · 5 篇首发知乎</span>
+							</div>
+							<div class="track">
+								<i class="ev" style="--x: 51%" title="2026-06-01 What this blog is for"></i>
+								<span class="ev-lab m-hide" style="left: calc(51% + 9px)">06-01</span>
+								<i class="ev" style="--x: 72.23%" title="2026-09-02 人类只是再次提升了编程的抽象层级"></i>
+								<i class="ev" style="--x: 74.33%" title="2026-09-11 GPT-6 + Open Design 前端设计，我给到夯"></i>
+								<i class="ev" style="--x: 75.27%" title="2026-09-15 阶段性总结，在大厂做了一年半 Agent 后"></i>
+								<i class="ev" style="--x: 75.5%" title="2026-09-16 聊聊工作的“厚黑学”"></i>
+								<i class="ev" style="--x: 75.73%" title="2026-09-17 关于创业碎碎念"></i>
+								<span class="ev-lab m-hide" style="left: calc(75.73% + 9px)">9 月 ×5</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="tr-foot">
+						<span>▸ 当前阶段：<b>创业</b>，同时在做 <b>open-dynamic-workflows</b></span>
+						<span>2025 年段按 1:3.5 压缩显示 · 更新于 2026-10-22</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="sec wrap" id="writing" aria-labelledby="writing-title">
+				<div class="seclabel">
+					<span class="num">01</span>
+					<h2 id="writing-title">文章</h2>
+					<span class="kick">Writing</span>
+					<span class="rule"></span>
+					<a class="more" href="#">全部 6 篇 →</a>
+				</div>
+				<ol class="log">
+					<li>
+						<a href="#">
+							<time datetime="2026-09-17">2026-09-17</time>
+							<span class="t"
+								><span class="ti">关于创业碎碎念</span><span class="de">离职、找需求、融资和重新学习慢下来。</span></span
+							>
+							<span class="m"><b>14 min</b> · #startup</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<time datetime="2026-09-16">2026-09-16</time>
+							<span class="t"
+								><span class="ti">聊聊工作的“厚黑学”</span><span class="de">在大厂工作，做事之外还要理解人和组织。</span></span
+							>
+							<span class="m"><b>3 min</b> · #career</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<time datetime="2026-09-15">2026-09-15</time>
+							<span class="t"
+								><span class="ti">阶段性总结，<wbr />在大厂做了一年半 Agent 后</span
+								><span class="de">一段从多专家系统走向 ReAct 的真实经历。</span></span
+							>
+							<span class="m"><b>18 min</b> · #ai-agents</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<time datetime="2026-09-11">2026-09-11</time>
+							<span class="t"
+								><span class="ti">GPT-6 + Open Design 前端设计，<wbr />我给到夯</span
+								><span class="de">从原型到实际页面，聊聊这次前端设计体验。</span></span
+							>
+							<span class="m"><b>3 min</b> · #ai-agents</span>
+						</a>
+					</li>
+					<li>
+						<a href="article.html">
+							<time datetime="2026-09-02">2026-09-02</time>
+							<span class="t"
+								><span class="ti">人类只是再次提升了<wbr />编程的抽象层级</span
+								><span class="de">从接线器到 Agent，人的意图正在更高层被表达。</span></span
+							>
+							<span class="m"><b>22 min</b> · #ai-agents</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" lang="en">
+							<time datetime="2026-06-01">2026-06-01</time>
+							<span class="t"
+								><span class="ti">What this blog is for</span
+								><span class="de">Notes on building AI agents, multi-agent systems, AI products, and knowledge work.</span></span
+							>
+							<span class="m"><b>1 min</b> · #meta</span>
+						</a>
+					</li>
+				</ol>
+			</section>
+
+			<section class="sec wrap" id="projects" aria-labelledby="projects-title">
+				<div class="seclabel">
+					<span class="num">02</span>
+					<h2 id="projects-title">项目</h2>
+					<span class="kick">Projects</span>
+					<span class="rule"></span>
+					<a class="more" href="https://github.com/xz1220">GitHub @xz1220 ↗</a>
+				</div>
+
+								<div class="pgroup">
+					<h3 class="pg-h"><span class="ix">a</span>AGENT 运行时与工具 <span class="cnt">3</span></h3>
+					<ul class="prows">
+						<li class="prow pinned">
+							<a href="https://github.com/xz1220/open-dynamic-workflows">
+								<span class="pn">open-dynamic-workflows</span>
+								<span class="pd">让 Claude Code 风格的动态工作流跑在 Codex、Gemini、Qwen、Kimi 等 CLI 上</span>
+								<span class="pl">TypeScript</span>
+								<span class="ps">★ 111</span>
+								<span class="pst"><span class="chip live sm"><span class="d"></span>进行中</span></span>
+							</a>
+						</li>
+						<li class="prow">
+							<a href="https://github.com/xz1220/AVM">
+								<span class="pn">AVM</span>
+								<span class="pd">定义一次 Coding Agent 配置，渲染到不同运行时</span>
+								<span class="pl">Go</span>
+								<span class="ps has">★ 3</span>
+								<span class="pst"><span class="chip arch sm">已归档</span></span>
+							</a>
+						</li>
+						<li class="prow">
+							<a href="https://github.com/xz1220/Kempt">
+								<span class="pn">Kempt</span>
+								<span class="pd">Claude Code / Codex 的 agent 债务扫描与可逆清理</span>
+								<span class="pl">TypeScript</span>
+								<span class="ps has">★ 2</span>
+								<span class="pst"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="pgroup">
+					<h3 class="pg-h"><span class="ix">b</span>写作与资料 <span class="cnt">3</span></h3>
+					<ul class="prows">
+						<li class="prow">
+							<a href="https://github.com/xz1220/harness-book">
+								<span class="pn">harness-book</span>
+								<span class="pd">从零手写 ReAct loop，讲 agent harness 工程的开源书</span>
+								<span class="pl">Python</span>
+								<span class="ps has">★ 1</span>
+								<span class="pst"></span>
+							</a>
+						</li>
+						<li class="prow">
+							<a href="https://github.com/xz1220/awesome-dynamic-workflows">
+								<span class="pn">awesome-dynamic-workflows</span>
+								<span class="pd">Dynamic Workflows 精选合集</span>
+								<span class="pl">—</span>
+								<span class="ps has">★ 1</span>
+								<span class="pst"></span>
+							</a>
+						</li>
+						<li class="prow">
+							<a href="https://github.com/xz1220/agent-interview-prep">
+								<span class="pn">agent-interview-prep</span>
+								<span class="pd">Agent 面试题库，附优质源码资料与题目映射</span>
+								<span class="pl">Shell</span>
+								<span class="ps has">★ 1</span>
+								<span class="pst"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="pgroup">
+					<h3 class="pg-h"><span class="ix">c</span>数据工具与早期项目 <span class="cnt">2</span></h3>
+					<ul class="prows">
+						<li class="prow">
+							<a href="https://github.com/xz1220/repotempo">
+								<span class="pn">repotempo</span>
+								<span class="pd">GitHub 趋势追踪：Trending 发现 + 每日 Star 历史</span>
+								<span class="pl">Go</span>
+								<span class="ps">—</span>
+								<span class="pst"></span>
+							</a>
+						</li>
+						<li class="prow">
+							<a href="https://github.com/xz1220/DIG-Data-Annotation-Platform">
+								<span class="pn">DIG-Data-Annotation-Platform</span>
+								<span class="pd">计算机视觉数据标注平台，带容器监控</span>
+								<span class="pl">Go</span>
+								<span class="ps has">★ 4</span>
+								<span class="pst"><span class="yr">2020</span></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<p class="pnote">另有若干私有仓库未列出</p>
+			</section>
+		</main>
+
+		<footer class="foot">
+			<div class="wrap foot-inner">
+				<span class="fb">邢政 <i>Daniel Xing</i> · © 2026</span>
+				<nav class="flinks" aria-label="其他平台">
+					<a href="https://github.com/xz1220">GitHub</a>
+					<a href="https://x.com/DanielsCabin">X</a>
+					<a href="https://www.zhihu.com/people/xz1220">知乎</a>
+					<a href="https://www.xiaohongshu.com/user/profile/655488ff00000000080023a0">小红书</a>
+					<a href="mailto:danielxing1@163.com">Email</a>
+					<a href="#">RSS</a>
+				</nav>
+				<a class="src" href="https://github.com/xz1220/xz1220.github.io">本站源码 ↗</a>
+			</div>
+		</footer>
+	</body>
+</html>
